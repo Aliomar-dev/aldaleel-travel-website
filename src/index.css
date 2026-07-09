@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Dancing+Script:wght@500;600;700&display=swap");
 @import "tailwindcss";
-
 
 @theme {
   --color-navy: #1e344d;
@@ -21,18 +20,96 @@
 
 html {
   scroll-behavior: auto;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: "Manrope", system-ui, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
   background: #f7fafc;
   color: #102033;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-synthesis: none;
+}
+
+/* Premium Travel Agency Typography */
+h1,
+h2,
+h3,
+h4,
+.heading-font,
+.text-luxury {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: -0.035em;
+}
+
+h1,
+h2 {
+  font-weight: 900;
+}
+
+h3,
+h4 {
+  font-weight: 800;
+}
+
+p,
+span,
+a,
+button,
+input,
+textarea,
+select,
+li,
+label {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
 }
 
 ::selection {
   background: #27a94f;
   color: white;
+}
+
+/* Signature Font */
+.font-signature {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Utility: use this on any heading for extra luxury look */
+.text-luxury {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: -0.04em;
+}
+
+/* Utility: use this on body text where clean premium readability is needed */
+.text-premium {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Global smooth image/text rendering */
+img,
+svg {
+  display: block;
 }
 
 .section-padding {
@@ -61,18 +138,29 @@ body {
 }
 
 .image-overlay {
-  background: linear-gradient(180deg, transparent 0%, rgba(16, 32, 51, 0.78) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(16, 32, 51, 0.78) 100%
+  );
 }
 
 .premium-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(39, 169, 79, 0.5), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(39, 169, 79, 0.5),
+    transparent
+  );
 }
 
 .card-3d {
   transform-style: preserve-3d;
   transform: perspective(1100px) rotateX(0deg) rotateY(0deg);
-  transition: transform 450ms ease, box-shadow 450ms ease;
+  transition:
+    transform 450ms ease,
+    box-shadow 450ms ease;
 }
 
 .card-3d:hover {
@@ -87,7 +175,12 @@ body {
 .route-line {
   position: absolute;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(39, 169, 79, 0.85), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(39, 169, 79, 0.85),
+    transparent
+  );
   animation: routeMove 3.2s ease-in-out infinite;
 }
 
@@ -96,14 +189,38 @@ body {
     opacity: 0.25;
     transform: translateX(-20px);
   }
+
   50% {
     opacity: 1;
     transform: translateX(20px);
   }
+
   100% {
     opacity: 0.25;
     transform: translateX(-20px);
   }
+}
+
+/* Line clamp helpers */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -114,4 +231,40 @@ body {
   .hero-image-3d {
     transform: none;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .heading-font,
+  .text-luxury {
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Global UI Font - Navbar, Footer, Buttons */
+.nav-font,
+.nav-font *,
+footer,
+footer *,
+button,
+a,
+.btn-font {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif !important;
+}
+
+/* Same premium weight for navbar/footer links */
+.nav-link-font,
+.footer-link-font {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+/* Same font for all CTA buttons */
+.cta-font {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
 }

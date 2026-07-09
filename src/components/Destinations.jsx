@@ -103,6 +103,11 @@ const Destinations = () => {
   const active = destinations[activeIndex];
   const ActiveIcon = active.icon;
 
+  const resetToMadinah = () => {
+    setActiveIndex(0);
+    setTimerKey((prev) => prev + 1);
+  };
+
   const changeDestination = (index) => {
     setActiveIndex(index);
     setTimerKey((prev) => prev + 1);
@@ -145,7 +150,7 @@ const Destinations = () => {
   return (
     <section
       id="destinations"
-      className="relative overflow-hidden bg-white py-16 text-navy md:py-20"
+      className="relative overflow-hidden bg-white py-14 text-navy sm:py-16 md:py-20"
     >
       <div className="absolute inset-0 bg-[linear-gradient(180deg,#ffffff_0%,#f7fafc_52%,#ffffff_100%)]" />
 
@@ -172,16 +177,16 @@ const Destinations = () => {
         />
       </svg>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-5">
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.55 }}
-          className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
+          className="mb-8 flex flex-col gap-5 md:mb-10 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-green/15 bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-green shadow-[0_12px_34px_rgba(16,32,51,0.055)] backdrop-blur-2xl">
+            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-green/15 bg-white/70 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-green shadow-[0_12px_34px_rgba(16,32,51,0.055)] backdrop-blur-2xl sm:text-xs sm:tracking-[0.22em]">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-green opacity-45 animate-ping" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green" />
@@ -189,13 +194,13 @@ const Destinations = () => {
               Premium Destinations
             </div>
 
-            <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
+            <h2 className="max-w-3xl text-[34px] font-black leading-tight tracking-tight sm:text-4xl md:text-6xl">
               Places that turn your travel into{" "}
               <span className="text-green">memories</span>
             </h2>
           </div>
 
-          <p className="max-w-md text-base font-semibold leading-7 text-slate-600">
+          <p className="max-w-md text-sm font-semibold leading-7 text-slate-600 sm:text-base">
             Explore popular destinations with a premium travel planning feel —
             flights, stays, visa guidance and complete journey support.
           </p>
@@ -204,15 +209,16 @@ const Destinations = () => {
         <motion.div
           initial={{ opacity: 0, y: 34 }}
           whileInView={{ opacity: 1, y: 0 }}
+          onViewportEnter={resetToMadinah}
           viewport={{ once: false, amount: 0.25 }}
           transition={{ duration: 0.65 }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
-          className="relative overflow-hidden rounded-[2.6rem] border border-slate-100 bg-white p-4 shadow-[0_30px_90px_rgba(16,32,51,0.10)]"
+          className="relative overflow-hidden rounded-[1.8rem] border border-slate-100 bg-white p-3 shadow-[0_30px_90px_rgba(16,32,51,0.10)] sm:rounded-[2.2rem] sm:p-4 md:rounded-[2.6rem]"
         >
-          <div className="relative min-h-[560px] overflow-hidden rounded-[2.1rem] bg-navy">
+          <div className="relative min-h-[640px] overflow-hidden rounded-[1.45rem] bg-navy sm:min-h-[610px] sm:rounded-[1.8rem] md:min-h-[560px] md:rounded-[2.1rem]">
             <AnimatePresence mode="wait">
               <motion.img
                 key={active.id}
@@ -222,16 +228,16 @@ const Destinations = () => {
                   event.currentTarget.onerror = null;
                   event.currentTarget.src = active.fallbackImage;
                 }}
-                initial={{ opacity: 0, scale: 1.08 }}
+                initial={{ opacity: 0, scale: 1.04 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
                 transition={{ duration: 0.55, ease: "easeOut" }}
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="absolute inset-0 h-full w-full object-contain object-top md:object-cover md:object-center"
               />
             </AnimatePresence>
 
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,34,0.88)_0%,rgba(7,21,34,0.46)_50%,rgba(7,21,34,0.18)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,21,34,0.08)_0%,rgba(7,21,34,0.74)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,21,34,0.18)_0%,rgba(7,21,34,0.44)_38%,rgba(7,21,34,0.90)_100%)] md:bg-[linear-gradient(90deg,rgba(7,21,34,0.88)_0%,rgba(7,21,34,0.46)_50%,rgba(7,21,34,0.18)_100%)]" />
+            <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(7,21,34,0.08)_0%,rgba(7,21,34,0.74)_100%)] md:block" />
 
             <div className="absolute left-0 right-0 top-0 z-10 h-[4px] bg-white/15">
               <motion.div
@@ -246,7 +252,7 @@ const Destinations = () => {
               />
             </div>
 
-            <div className="absolute left-0 right-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(39,169,79,0.26)_0%,rgba(255,255,255,0.10)_45%,transparent_100%)] backdrop-blur-[1px]" />
+            <div className="absolute left-0 right-0 top-0 h-32 bg-[linear-gradient(180deg,rgba(39,169,79,0.20)_0%,rgba(255,255,255,0.08)_45%,transparent_100%)] backdrop-blur-[1px] md:h-40 md:bg-[linear-gradient(180deg,rgba(39,169,79,0.26)_0%,rgba(255,255,255,0.10)_45%,transparent_100%)]" />
 
             <div className="absolute left-7 right-7 top-7 hidden items-center gap-3 md:flex">
               <span className="h-[2px] flex-1 rounded-full bg-white/18" />
@@ -264,11 +270,11 @@ const Destinations = () => {
               <span className="h-[2px] flex-1 rounded-full bg-white/18" />
             </div>
 
-            <div className="absolute right-6 top-6 z-20 flex gap-3">
+            <div className="absolute right-4 top-4 z-20 flex gap-2 sm:right-6 sm:top-6 sm:gap-3">
               <button
                 type="button"
                 onClick={prevDestination}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/12 text-white backdrop-blur-2xl transition hover:bg-green hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/12 text-white backdrop-blur-2xl transition hover:bg-green hover:text-white sm:h-11 sm:w-11"
                 aria-label="Previous destination"
               >
                 <FaChevronLeft />
@@ -277,7 +283,7 @@ const Destinations = () => {
               <button
                 type="button"
                 onClick={nextDestination}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/12 text-white backdrop-blur-2xl transition hover:bg-green hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/12 text-white backdrop-blur-2xl transition hover:bg-green hover:text-white sm:h-11 sm:w-11"
                 aria-label="Next destination"
               >
                 <FaChevronRight />
@@ -300,7 +306,7 @@ const Destinations = () => {
               ))}
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${active.id}-content`}
@@ -310,42 +316,42 @@ const Destinations = () => {
                   transition={{ duration: 0.4 }}
                   className="max-w-2xl text-white"
                 >
-                  <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/12 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white backdrop-blur-2xl">
+                  <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/12 px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white backdrop-blur-2xl sm:text-xs sm:tracking-[0.2em]">
                     <ActiveIcon className="text-green" />
                     {active.type}
                   </div>
 
-                  <h3 className="text-5xl font-black leading-none md:text-7xl">
+                  <h3 className="text-[42px] font-black leading-none sm:text-5xl md:text-7xl">
                     {active.city}
                   </h3>
 
-                  <p className="mt-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.2em] text-green">
+                  <p className="mt-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-green sm:text-sm sm:tracking-[0.2em]">
                     <FaMapMarkerAlt />
                     {active.country}
                   </p>
 
-                  <p className="mt-5 max-w-xl text-base font-medium leading-8 text-white/78 md:text-lg">
+                  <p className="mt-4 max-w-xl text-sm font-medium leading-7 text-white/82 sm:text-base md:mt-5 md:text-lg md:leading-8">
                     {active.desc}
                   </p>
 
-                  <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="mt-5 flex flex-wrap gap-2.5 md:mt-6 md:gap-3">
                     {active.highlights.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-white/14 bg-white/12 px-4 py-2 text-xs font-black text-white backdrop-blur-xl"
+                        className="rounded-full border border-white/14 bg-white/12 px-3.5 py-2 text-[11px] font-black text-white backdrop-blur-xl sm:text-xs sm:px-4"
                       >
                         {item}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mt-8">
+                  <div className="mt-6 md:mt-8">
                     <motion.a
                       href="/destinations"
                       onClick={handleExploreClick}
                       whileHover="hover"
                       whileTap="tap"
-                      className="group relative inline-flex min-w-[185px] items-center justify-center overflow-hidden rounded-full border border-green/25 bg-green/15 px-5 py-2.5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-[0_14px_34px_rgba(39,169,79,0.12)] backdrop-blur-xl transition hover:border-green/40 hover:bg-green/25 hover:shadow-[0_18px_45px_rgba(39,169,79,0.20)] md:text-sm"
+                      className="group relative inline-flex min-w-[176px] items-center justify-center overflow-hidden rounded-full border border-green/25 bg-green/15 px-5 py-2.5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-[0_14px_34px_rgba(39,169,79,0.12)] backdrop-blur-xl transition hover:border-green/40 hover:bg-green/25 hover:shadow-[0_18px_45px_rgba(39,169,79,0.20)] md:min-w-[185px] md:text-sm"
                     >
                       <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(39,169,79,0.14),rgba(255,255,255,0.18),rgba(39,169,79,0.08))]" />
 

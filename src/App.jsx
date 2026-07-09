@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 
+//Components
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import Hero from "./components/Hero";
@@ -12,7 +13,12 @@ import Destinations from "./components/Destinations";
 import Testimonials from "./components/Testimonials";
 import BookingForm from "./components/BookingForm";
 import Footer from "./components/Footer";
+
+//Pages
 import ThankYou from "./pages/ThankYou";
+import ExpertisePage from "./pages/ExpertisePage";
+import AboutUsPage from "./pages/AboutUsPage";
+import BlogPage from "./pages/BlogPage";
 
 function RouteTopScroll() {
   const location = useLocation();
@@ -38,8 +44,8 @@ function HomePage() {
       <TravelAgentBridge />
 
       <div className="relative z-30 -mt-8 sm:-mt-10 md:-mt-14">
-        <Services />
-      </div>
+  <Services />
+</div>
 
       <Destinations />
 
@@ -90,9 +96,11 @@ function AppContent() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/expertise" element={<ExpertisePage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
       </Routes>
 
       <Footer />
