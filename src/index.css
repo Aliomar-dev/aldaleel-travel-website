@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+
+@theme {
+  --color-navy: #1e344d;
+  --color-darknavy: #102033;
+  --color-green: #27a94f;
+  --color-soft: #f7fafc;
+  --color-muted: #64748b;
+  --color-gold: #c99a35;
+
+  --shadow-premium: 0 28px 90px rgba(16, 32, 51, 0.14);
+  --shadow-card: 0 18px 45px rgba(16, 32, 51, 0.08);
+  --shadow-green: 0 18px 55px rgba(39, 169, 79, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", system-ui, sans-serif;
+  background: #f7fafc;
+  color: #102033;
+}
+
+::selection {
+  background: #27a94f;
+  color: white;
+}
+
+.section-padding {
+  padding: 95px 0;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+}
+
+.hero-premium-bg {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(39, 169, 79, 0.14), transparent 28%),
+    radial-gradient(circle at 88% 14%, rgba(30, 52, 77, 0.13), transparent 30%),
+    linear-gradient(135deg, #ffffff 0%, #f7fafc 44%, #edf8f1 100%);
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(16, 32, 51, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 32, 51, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.image-overlay {
+  background: linear-gradient(180deg, transparent 0%, rgba(16, 32, 51, 0.78) 100%);
+}
+
+.premium-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(39, 169, 79, 0.5), transparent);
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transform: perspective(1100px) rotateX(0deg) rotateY(0deg);
+  transition: transform 450ms ease, box-shadow 450ms ease;
+}
+
+.card-3d:hover {
+  transform: perspective(1100px) rotateX(3deg) rotateY(-4deg) translateY(-8px);
+}
+
+.hero-image-3d {
+  transform: perspective(1200px) rotateY(-7deg) rotateX(3deg);
+  transform-style: preserve-3d;
+}
+
+.route-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(39, 169, 79, 0.85), transparent);
+  animation: routeMove 3.2s ease-in-out infinite;
+}
+
+@keyframes routeMove {
+  0% {
+    opacity: 0.25;
+    transform: translateX(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 0.25;
+    transform: translateX(-20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 72px 0;
+  }
+
+  .hero-image-3d {
+    transform: none;
+  }
+}
