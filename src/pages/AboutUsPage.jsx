@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 import {
   FaPlane,
   FaCheckCircle,
@@ -141,6 +142,13 @@ const AboutUsPage = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
+
+      <SEO
+  title="About Aldaleel Travel & Tourism | Travel Agency in Riyadh"
+  description="Learn about Aldaleel Travel & Tourism, a reliable travel agency in Riyadh, Saudi Arabia helping customers with flights, visa guidance, hotels, Smart Umrah, tours and transport."
+  keywords="about Aldaleel Travel, Aldaleel Travel Riyadh, travel agency in Riyadh, Saudi travel company, Aldaleel Travel and Tourism KSA"
+  path="/about"
+/>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(39,169,79,0.12),transparent_27%),radial-gradient(circle_at_88%_16%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_46%,#ffffff_100%)]" />
 
       <div className="absolute inset-0 opacity-[0.22]">
@@ -564,7 +572,7 @@ const AboutUsPage = () => {
               className="inline-flex items-center gap-2 text-sm font-black text-green transition hover:gap-3"
             >
               View Expertise
-              <FaPlane className="rotate-45 text-xs" />
+              <FaPlane className="rotate-360 text-xs" />
             </Link>
           </div>
 
@@ -649,15 +657,7 @@ const AboutUsPage = () => {
                 reservations, Umrah planning or custom travel arrangements.
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link
-                  to="/booking"
-                  className="inline-flex items-center gap-3 rounded-full bg-green px-6 py-3 text-sm font-black text-white shadow-[0_18px_45px_rgba(39,169,79,0.32)] transition hover:-translate-y-1 hover:bg-[#1f8d40]"
-                >
-                  Get Travel Quote
-                  <FaPlane className="rotate-45 text-xs" />
-                </Link>
-              </div>
+             
             </div>
 
             <div className="space-y-3">

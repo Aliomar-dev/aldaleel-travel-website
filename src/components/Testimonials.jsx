@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { FaGoogle, FaStar, FaUserCircle, FaPlane } from "react-icons/fa";
 
+
 const businessInfo = {
   name: "Aldaleel Travel and Tourism KSA",
   rating: 5.0,

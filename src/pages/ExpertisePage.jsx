@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import SEO from "../components/SEO";
 import {
   FaPlane,
   FaPlaneDeparture,
@@ -66,6 +67,14 @@ const ExpertisePage = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
+
+<SEO
+  title="Travel Services in Riyadh | Flights, Visa, Hotels & Umrah"
+  description="Explore Aldaleel Travel & Tourism services including flight booking, visa guidance, hotel reservations, Smart Umrah, international tours and transport arrangements in Riyadh."
+  keywords="travel services Riyadh, flight booking Riyadh, visa guidance Saudi Arabia, hotel reservation Riyadh, Smart Umrah services, Umrah travel agency Riyadh, transport arrangements Saudi Arabia"
+  path="/expertise"
+/>
+
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(39,169,79,0.12),transparent_25%),radial-gradient(circle_at_88%_15%,rgba(8,35,58,0.09),transparent_24%),linear-gradient(180deg,#ffffff_0%,#f7fafc_42%,#ffffff_100%)]" />
 

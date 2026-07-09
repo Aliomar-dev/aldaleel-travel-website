@@ -13,6 +13,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
+
 const phone = "+966-53 1314557";
 const email = "info@aldaleeltravel.com";
 const address =
@@ -163,7 +164,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="inline-flex items-center">
               <img
-                src="/aldaleel-logo-green-white.svg"
+                src="/logo.svg"
                 alt="Aldaleel Travel and Tourism"
 className="h-14 w-auto object-contain md:h-16"              />
             </Link>

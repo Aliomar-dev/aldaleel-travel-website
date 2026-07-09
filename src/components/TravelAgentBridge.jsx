@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { FaPlane } from "react-icons/fa";
 
+
 const TravelAgentBridge = () => {
   const sectionRef = useRef(null);
 

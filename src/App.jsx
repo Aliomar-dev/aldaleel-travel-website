@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 
-//Components
+// Components
+import SEO from "./components/SEO";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import Hero from "./components/Hero";
@@ -14,7 +15,7 @@ import Testimonials from "./components/Testimonials";
 import BookingForm from "./components/BookingForm";
 import Footer from "./components/Footer";
 
-//Pages
+// Pages
 import ThankYou from "./pages/ThankYou";
 import ExpertisePage from "./pages/ExpertisePage";
 import AboutUsPage from "./pages/AboutUsPage";
@@ -37,6 +38,13 @@ function RouteTopScroll() {
 function HomePage() {
   return (
     <>
+      <SEO
+        title="Aldaleel Travel & Tourism | Premium Travel Agency in Riyadh"
+        description="Aldaleel Travel & Tourism is a professional travel agency in Riyadh, Saudi Arabia offering flight bookings, visa guidance, hotel reservations, Smart Umrah, tours and transport arrangements."
+        keywords="Aldaleel Travel, travel agency Riyadh, travel agency Saudi Arabia, flights booking Riyadh, visa guidance Riyadh, hotel booking Riyadh, Smart Umrah, Umrah services Saudi Arabia, transport services Riyadh"
+        path="/"
+      />
+
       <Hero />
 
       <About />
@@ -44,8 +52,8 @@ function HomePage() {
       <TravelAgentBridge />
 
       <div className="relative z-30 -mt-8 sm:-mt-10 md:-mt-14">
-  <Services />
-</div>
+        <Services />
+      </div>
 
       <Destinations />
 
@@ -54,23 +62,24 @@ function HomePage() {
   );
 }
 
-function AboutPage() {
+function BookingPage() {
   return (
     <>
-      <About />
+      <SEO
+        title="Get Travel Quote | Aldaleel Travel & Tourism Riyadh"
+        description="Request a travel quote from Aldaleel Travel & Tourism for flights, visa guidance, hotel bookings, Smart Umrah, tours and transport arrangements."
+        keywords="get travel quote Riyadh, travel booking Riyadh, flight quote Saudi Arabia, Umrah package inquiry, visa guidance inquiry, Aldaleel Travel booking"
+        path="/booking"
+      />
+
+      <div className="min-h-screen bg-[#f7fafc] pt-[92px] md:pt-[104px]">
+        <BookingForm />
+      </div>
     </>
   );
 }
 
-function BookingPage() {
-  return (
-    <div className="min-h-screen bg-[#f7fafc] pt-[92px] md:pt-[104px]">
-      <BookingForm />
-    </div>
-  );
-}
-
-function AppContent() {
+function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.08,
@@ -106,14 +115,6 @@ function AppContent() {
       <Footer />
       <ScrollToTop />
     </main>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
   );
 }
 

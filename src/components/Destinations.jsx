@@ -12,6 +12,7 @@ import {
   FaChevronRight,
 } from "react-icons/fa";
 
+
 const SLIDE_TIME = 5000;
 
 const destinations = [

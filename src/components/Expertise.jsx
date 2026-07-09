@@ -7,6 +7,7 @@ import {
   FaCarSide,
 } from "react-icons/fa";
 
+
 const expertiseItems = [
   {
     icon: FaPlaneDeparture,

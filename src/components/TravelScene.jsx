@@ -3,6 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Float, Environment, OrbitControls } from "@react-three/drei";
 
+
 const Airplane = () => {
   return (
     <Float speed={2.5} rotationIntensity={0.5} floatIntensity={1.5}>

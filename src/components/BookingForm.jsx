@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
+
 import {
   FaPlane,
   FaUser,
@@ -132,6 +134,13 @@ const BookingForm = () => {
       id="booking"
       className="relative overflow-hidden bg-[#f7fafc] px-4 py-6 text-navy md:px-5 md:py-8"
     >
+<SEO
+  title="Get Travel Quote | Aldaleel Travel & Tourism Riyadh"
+  description="Request a travel quote from Aldaleel Travel & Tourism for flights, visa guidance, hotel bookings, Smart Umrah, tours and transport arrangements."
+  keywords="get travel quote Riyadh, travel booking Riyadh, flight quote Saudi Arabia, Umrah package inquiry, visa guidance inquiry, Aldaleel Travel booking"
+  path="/booking"
+/>
+
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(39,169,79,0.12),transparent_25%),radial-gradient(circle_at_88%_10%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_100%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl">

@@ -1,0 +1,21 @@
+{
+  "name": "Aldaleel Travel & Tourism",
+  "short_name": "Aldaleel Travel",
+  "description": "Professional travel agency in Riyadh, Saudi Arabia for flights, visa guidance, hotels, Smart Umrah, tours and transport.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08233a",
+  "theme_color": "#27a94f",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

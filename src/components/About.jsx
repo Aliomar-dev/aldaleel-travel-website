@@ -178,7 +178,7 @@ const Company = () => {
               className="mt-7"
             >
               <motion.a
-                href="/about"
+                to ="/about"
                 onClick={handleLearnMoreClick}
                 whileHover="hover"
                 whileTap="tap"

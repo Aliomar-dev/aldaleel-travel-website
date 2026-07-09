@@ -12,6 +12,7 @@ import {
   FaNewspaper,
 } from "react-icons/fa";
 
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
@@ -186,7 +187,7 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
           >
             <Link to="/" className="flex items-center">
               <img
-                src="/aldaleel-logo-green-white.svg"
+                src="/logo.svg"
                 alt="Aldaleel Travel and Tourism"
                 className="h-12 w-auto object-contain md:h-14"
               />

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import SEO from "../components/SEO";
 import {
   FaNewspaper,
   FaExternalLinkAlt,
@@ -464,7 +465,16 @@ const BlogPage = () => {
   }, [apiUrl]);
 
   return (
+    
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
+
+<SEO
+  title="Travel Blog | Aldaleel Travel & Tourism"
+  description="Read helpful travel tips, visa guidance, Umrah planning advice, flight booking tips and Saudi travel updates from Aldaleel Travel & Tourism."
+  keywords="travel blog Saudi Arabia, Riyadh travel tips, Umrah travel tips, visa guidance blog, flight booking tips, Aldaleel Travel blog"
+  path="/blog"
+/>
+
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(39,169,79,0.12),transparent_27%),radial-gradient(circle_at_88%_16%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_46%,#ffffff_100%)]" />
 
       <div className="absolute inset-0 opacity-[0.22]">
@@ -856,28 +866,7 @@ const BlogPage = () => {
           transition={{ duration: 0.55 }}
           className="mt-10 overflow-hidden rounded-[2rem] bg-navy p-6 text-white shadow-[0_28px_85px_rgba(7,21,34,0.18)] md:p-8"
         >
-          <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-green">
-                Need Travel Help?
-              </p>
-              <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-                Let Aldaleel guide your next journey.
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm font-semibold leading-7 text-white/62">
-                For flights, visas, hotels, Umrah and transport arrangements,
-                send your travel request to our team.
-              </p>
-            </div>
-
-            <Link
-              to="/booking"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-green px-7 py-3.5 text-sm font-black text-white shadow-[0_18px_45px_rgba(39,169,79,0.32)] transition hover:-translate-y-1 hover:bg-[#1f8d40]"
-            >
-              Get Travel Quote
-              <FaPlane className="rotate-45 text-xs" />
-            </Link>
-          </div>
+       
         </motion.div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { whyChoose } from "../data/siteData";
 
+
 const WhyChooseUs = () => {
   return (
     <section className="section-padding bg-gradient-to-br from-navy to-[#0b2d45] text-white">

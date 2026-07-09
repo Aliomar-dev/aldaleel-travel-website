@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { FaChevronDown, FaPlane, FaMapMarkerAlt } from "react-icons/fa";
 
+
 const TypingHeroTitle = ({ playKey }) => {
   const fullText = "Your World. Your Journey.\nOur Expertise.";
   const [displayText, setDisplayText] = useState("");
