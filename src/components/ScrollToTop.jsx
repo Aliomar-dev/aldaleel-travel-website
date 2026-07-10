@@ -8,7 +8,6 @@ import {
 } from "motion/react";
 import { FaPlane } from "react-icons/fa";
 
-
 const ScrollToTop = () => {
   const [show, setShow] = useState(false);
   const [fly, setFly] = useState(false);
@@ -58,6 +57,8 @@ const ScrollToTop = () => {
   }, [progress]);
 
   const handleClick = () => {
+    if (fly) return;
+
     setFly(true);
 
     setTimeout(() => {
@@ -69,23 +70,31 @@ const ScrollToTop = () => {
 
     setTimeout(() => {
       setFly(false);
-    }, 1200);
+    }, 1250);
   };
 
   return (
     <>
       <AnimatePresence>
-        {show && (
+        {(show || fly) && (
           <motion.button
             type="button"
             onClick={handleClick}
             initial={{ opacity: 0, y: 24, scale: 0.86 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.86 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 24,
+              scale: 0.86,
+            }}
             whileHover={{ scale: 1.04, y: -3 }}
             whileTap={{ scale: 0.94 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
-            className="group fixed bottom-6 right-5 z-50"
+            className="group fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-5 z-50"
             aria-label="Scroll to top"
           >
             <div className="relative h-[56px] w-[56px] md:h-[60px] md:w-[60px]">
@@ -121,6 +130,7 @@ const ScrollToTop = () => {
                 />
               </svg>
 
+              {/* Button plane - ab click par gaib nahi hoga */}
               <motion.div
                 style={
                   fly
@@ -135,10 +145,10 @@ const ScrollToTop = () => {
                   fly
                     ? {
                         x: [0, 0, 0],
-                        y: [0, -30, -78],
+                        y: [0, -16, 0],
                         rotate: [-90, -90, -90],
-                        scale: [1, 1.08, 0.82],
-                        opacity: [1, 1, 0],
+                        scale: [1, 1.06, 1],
+                        opacity: [1, 1, 1],
                       }
                     : {
                         scale: [1, 1.04, 1],
@@ -147,7 +157,7 @@ const ScrollToTop = () => {
                 transition={
                   fly
                     ? {
-                        duration: 0.82,
+                        duration: 0.75,
                         ease: "easeInOut",
                       }
                     : {
@@ -165,8 +175,8 @@ const ScrollToTop = () => {
                 animate={
                   fly
                     ? {
-                        opacity: [0.2, 0.08, 0],
-                        scale: [1, 0.7, 0.25],
+                        opacity: [0.18, 0.26, 0.18],
+                        scale: [1, 1.05, 1],
                       }
                     : {
                         opacity: [0.14, 0.28, 0.14],
@@ -175,7 +185,10 @@ const ScrollToTop = () => {
                 }
                 transition={
                   fly
-                    ? { duration: 0.78 }
+                    ? {
+                        duration: 0.75,
+                        ease: "easeInOut",
+                      }
                     : {
                         duration: 2.2,
                         repeat: Infinity,
@@ -214,7 +227,7 @@ const ScrollToTop = () => {
               duration: 1.12,
               ease: "easeInOut",
             }}
-            className="pointer-events-none fixed bottom-14 right-8 z-[80]"
+            className="pointer-events-none fixed bottom-[calc(3.5rem+env(safe-area-inset-bottom))] right-8 z-[80]"
           >
             <div className="relative">
               {/* Aero trail behind plane */}
@@ -268,7 +281,6 @@ const ScrollToTop = () => {
                 className="absolute left-[58%] top-[38px] w-[1.5px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/70 via-green/25 to-transparent"
               />
 
-              {/* Small smoke dots */}
               <motion.span
                 initial={{ opacity: 0, y: 18, scale: 0.4 }}
                 animate={{

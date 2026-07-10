@@ -346,33 +346,7 @@ const Destinations = () => {
                     ))}
                   </div>
 
-                  <div className="mt-6 md:mt-8">
-                    <motion.a
-                      href="/destinations"
-                      onClick={handleExploreClick}
-                      whileHover="hover"
-                      whileTap="tap"
-                      className="group relative inline-flex min-w-[176px] items-center justify-center overflow-hidden rounded-full border border-green/25 bg-green/15 px-5 py-2.5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-[0_14px_34px_rgba(39,169,79,0.12)] backdrop-blur-xl transition hover:border-green/40 hover:bg-green/25 hover:shadow-[0_18px_45px_rgba(39,169,79,0.20)] md:min-w-[185px] md:text-sm"
-                    >
-                      <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(39,169,79,0.14),rgba(255,255,255,0.18),rgba(39,169,79,0.08))]" />
-
-                      <span className="relative z-10 pr-8">
-                        Explore Places
-                      </span>
-
-                      <motion.span
-                        variants={{
-                          hover: { x: 8 },
-                          tap: { x: 14 },
-                        }}
-                        animate={fly ? { x: 70, opacity: [1, 1, 0] } : {}}
-                        transition={{ duration: 0.42, ease: "easeInOut" }}
-                        className="absolute right-5 z-10 inline-flex text-green"
-                      >
-                        <FaPlane className="rotate-90 text-[13px]" />
-                      </motion.span>
-                    </motion.a>
-                  </div>
+              
                 </motion.div>
               </AnimatePresence>
             </div>
