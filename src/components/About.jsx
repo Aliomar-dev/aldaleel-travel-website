@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, useInView } from "motion/react";
 import { FaCheckCircle, FaPlane } from "react-icons/fa";
+
+const MotionLink = motion.create(Link);
 
 const stats = [
   { end: 24, suffix: "/7", label: "Travel Support" },
@@ -50,16 +53,15 @@ const CountUp = ({ end, suffix = "" }) => {
 const Company = () => {
   const [learnMoreFly, setLearnMoreFly] = useState(false);
 
-  const handleLearnMoreClick = (event) => {
-    event.preventDefault();
-
+  const handleLearnMoreClick = () => {
     if (learnMoreFly) return;
 
     setLearnMoreFly(true);
+    window.__lenis?.start?.();
 
     setTimeout(() => {
-      window.location.href = "/about";
-    }, 520);
+      setLearnMoreFly(false);
+    }, 700);
   };
 
   return (
@@ -86,6 +88,7 @@ const Company = () => {
           viewport={{ once: false, amount: 0.25 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
+
         <motion.path
           d="M100 120 C 330 40, 530 110, 760 200 S 1100 300, 1400 120"
           stroke="#08233a"
@@ -114,7 +117,10 @@ const Company = () => {
               transition={{ duration: 0.45 }}
               className="mb-4 inline-flex items-center gap-3 rounded-full border border-green/15 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-green shadow-[0_12px_34px_rgba(16,32,51,0.055)]"
             >
-              <span className="h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_14px_rgba(39,169,79,0.85)]" />
+              <span className="relative flex h-2.5 w-2.5 items-center justify-center">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-45" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_14px_rgba(39,169,79,0.85)]" />
+              </span>
               About Aldaleel
             </motion.div>
 
@@ -163,6 +169,7 @@ const Company = () => {
                   className="flex items-center gap-3"
                 >
                   <FaCheckCircle className="shrink-0 text-green" />
+
                   <span className="text-sm font-extrabold text-slate-700">
                     {item}
                   </span>
@@ -177,8 +184,8 @@ const Company = () => {
               transition={{ duration: 0.45, delay: 0.34 }}
               className="mt-7"
             >
-              <motion.a
-                to ="/about"
+              <MotionLink
+                to="/about?back=company"
                 onClick={handleLearnMoreClick}
                 whileHover="hover"
                 whileTap="tap"
@@ -199,7 +206,7 @@ const Company = () => {
                 >
                   <FaPlane className="rotate-360 text-[13px]" />
                 </motion.span>
-              </motion.a>
+              </MotionLink>
             </motion.div>
           </motion.div>
 

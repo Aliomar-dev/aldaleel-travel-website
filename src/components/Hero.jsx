@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { FaChevronDown, FaPlane, FaMapMarkerAlt } from "react-icons/fa";
 
-
 const TypingHeroTitle = ({ playKey }) => {
   const fullText = "Your World. Your Journey.\nOur Expertise.";
   const [displayText, setDisplayText] = useState("");
@@ -27,13 +26,25 @@ const TypingHeroTitle = ({ playKey }) => {
   return (
     <h1 className="cursor-default whitespace-pre-line text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-7xl lg:text-[82px]">
       {displayText}
-      <span className="ml-1 inline-block h-8 w-[3px] translate-y-1 bg-green animate-pulse sm:h-10 md:h-14" />
+      <span className="ml-1 inline-block h-8 w-[3px] translate-y-1 animate-pulse bg-green sm:h-10 md:h-14" />
     </h1>
   );
 };
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const allowDiscoverJumpRef = useRef(false);
+  const lockActiveRef = useRef(true);
+
+  const originalStylesRef = useRef({
+    htmlOverflow: "",
+    htmlOverscroll: "",
+    htmlTouchAction: "",
+    bodyOverflow: "",
+    bodyOverscroll: "",
+    bodyTouchAction: "",
+  });
+
   const [typingPlayKey, setTypingPlayKey] = useState(0);
 
   useEffect(() => {
@@ -56,18 +67,245 @@ const Hero = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+
+    originalStylesRef.current = {
+      htmlOverflow: html.style.overflow,
+      htmlOverscroll: html.style.overscrollBehavior,
+      htmlTouchAction: html.style.touchAction,
+      bodyOverflow: body.style.overflow,
+      bodyOverscroll: body.style.overscrollBehavior,
+      bodyTouchAction: body.style.touchAction,
+    };
+
+    const isLocked = () => {
+      return lockActiveRef.current && !allowDiscoverJumpRef.current;
+    };
+
+    const lockPage = () => {
+      if (!isLocked()) return;
+
+      window.__lenis?.stop?.();
+
+      html.style.overflow = "hidden";
+      html.style.overscrollBehavior = "none";
+      html.style.touchAction = "none";
+
+      body.style.overflow = "hidden";
+      body.style.overscrollBehavior = "none";
+      body.style.touchAction = "none";
+
+      if (window.scrollY !== 0) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    };
+
+    const restorePage = () => {
+      html.style.overflow = originalStylesRef.current.htmlOverflow;
+      html.style.overscrollBehavior = originalStylesRef.current.htmlOverscroll;
+      html.style.touchAction = originalStylesRef.current.htmlTouchAction;
+
+      body.style.overflow = originalStylesRef.current.bodyOverflow;
+      body.style.overscrollBehavior = originalStylesRef.current.bodyOverscroll;
+      body.style.touchAction = originalStylesRef.current.bodyTouchAction;
+
+      window.__lenis?.start?.();
+    };
+
+    const hardBlock = (event) => {
+      if (!isLocked()) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (typeof event.stopImmediatePropagation === "function") {
+        event.stopImmediatePropagation();
+      }
+
+      window.__lenis?.stop?.();
+
+      if (window.scrollY !== 0) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+
+      return false;
+    };
+
+    const blockKeyboard = (event) => {
+      if (!isLocked()) return;
+
+      const blockedKeys = [
+        "ArrowDown",
+        "ArrowUp",
+        "PageDown",
+        "PageUp",
+        " ",
+        "Spacebar",
+        "Home",
+        "End",
+      ];
+
+      if (!blockedKeys.includes(event.key)) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (typeof event.stopImmediatePropagation === "function") {
+        event.stopImmediatePropagation();
+      }
+
+      window.__lenis?.stop?.();
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      return false;
+    };
+
+    const forceTop = () => {
+      if (!isLocked()) return;
+
+      window.__lenis?.stop?.();
+
+      if (window.scrollY !== 0) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    };
+
+    lockPage();
+
+    const lockInterval = window.setInterval(() => {
+      if (!isLocked()) return;
+      lockPage();
+    }, 80);
+
+    window.addEventListener("wheel", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    document.addEventListener("wheel", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    document.body.addEventListener("wheel", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    window.addEventListener("touchmove", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    document.addEventListener("touchmove", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    document.body.addEventListener("touchmove", hardBlock, {
+      passive: false,
+      capture: true,
+    });
+
+    window.addEventListener("keydown", blockKeyboard, {
+      passive: false,
+      capture: true,
+    });
+
+    document.addEventListener("keydown", blockKeyboard, {
+      passive: false,
+      capture: true,
+    });
+
+    window.addEventListener("scroll", forceTop, { passive: true });
+
+    return () => {
+      lockActiveRef.current = false;
+      window.clearInterval(lockInterval);
+      restorePage();
+
+      window.removeEventListener("wheel", hardBlock, true);
+      document.removeEventListener("wheel", hardBlock, true);
+      document.body.removeEventListener("wheel", hardBlock, true);
+
+      window.removeEventListener("touchmove", hardBlock, true);
+      document.removeEventListener("touchmove", hardBlock, true);
+      document.body.removeEventListener("touchmove", hardBlock, true);
+
+      window.removeEventListener("keydown", blockKeyboard, true);
+      document.removeEventListener("keydown", blockKeyboard, true);
+
+      window.removeEventListener("scroll", forceTop);
+    };
+  }, []);
+
   const scrollToAbout = () => {
     const section =
       document.getElementById("about") || document.getElementById("company");
 
-    if (section) {
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+    if (!section) return;
 
-      window.scrollTo({
-        top: sectionTop,
-        behavior: "smooth",
+    allowDiscoverJumpRef.current = true;
+    lockActiveRef.current = false;
+
+    const html = document.documentElement;
+    const body = document.body;
+
+    html.style.overflow = originalStylesRef.current.htmlOverflow;
+    html.style.overscrollBehavior = originalStylesRef.current.htmlOverscroll;
+    html.style.touchAction = originalStylesRef.current.htmlTouchAction;
+
+    body.style.overflow = originalStylesRef.current.bodyOverflow;
+    body.style.overscrollBehavior = originalStylesRef.current.bodyOverscroll;
+    body.style.touchAction = originalStylesRef.current.bodyTouchAction;
+
+    window.__lenis?.start?.();
+
+    const navbarOffset = window.innerWidth >= 768 ? 104 : 86;
+    const targetTop = Math.max(section.offsetTop - navbarOffset, 0);
+
+    if (window.__lenis) {
+      window.__lenis.scrollTo(targetTop, {
+        immediate: true,
+        force: true,
+        offset: 0,
       });
     }
+
+    window.scrollTo({
+      top: targetTop,
+      left: 0,
+      behavior: "auto",
+    });
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: targetTop,
+        left: 0,
+        behavior: "auto",
+      });
+
+      allowDiscoverJumpRef.current = false;
+    }, 100);
   };
 
   return (
@@ -76,7 +314,6 @@ const Hero = () => {
       id="home"
       className="relative min-h-screen overflow-hidden bg-[#071522] text-white"
     >
-      {/* Floating Hero Background */}
       <motion.div
         animate={{
           y: [0, -18, 0],
@@ -93,11 +330,9 @@ const Hero = () => {
         }}
       />
 
-      {/* Premium Dark Overlays */}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,34,0.92)_0%,rgba(7,21,34,0.74)_45%,rgba(7,21,34,0.50)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(39,169,79,0.24),transparent_28%),radial-gradient(circle_at_82%_16%,rgba(255,255,255,0.10),transparent_22%)]" />
 
-      {/* Animated Route Lines */}
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.18]"
         viewBox="0 0 1400 850"
@@ -124,7 +359,6 @@ const Hero = () => {
         />
       </svg>
 
-      {/* Airplane moving inside wave route */}
       <motion.div
         animate={{
           x: [
@@ -151,7 +385,6 @@ const Hero = () => {
         <FaPlane />
       </motion.div>
 
-      {/* Company Badges */}
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -170,7 +403,6 @@ const Hero = () => {
         Travel Support
       </motion.div>
 
-      {/* Hero Content with Lift Effect */}
       <motion.div
         initial={{ opacity: 0, y: 85, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -185,7 +417,7 @@ const Hero = () => {
             className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white shadow-[0_16px_45px_rgba(0,0,0,0.15)] backdrop-blur-xl"
           >
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-green opacity-50 animate-ping" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-50" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green" />
             </span>
             Premium Travel Agency
@@ -287,7 +519,6 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Very Light Bottom Fade */}
       <div className="absolute bottom-0 left-0 right-0 z-10 h-10 bg-[linear-gradient(180deg,transparent_0%,rgba(255,255,255,0.18)_100%)]" />
     </section>
   );

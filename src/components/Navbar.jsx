@@ -12,7 +12,6 @@ import {
   FaNewspaper,
 } from "react-icons/fa";
 
-
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
@@ -26,16 +25,23 @@ const Navbar = () => {
   const isExpertisePage = location.pathname === "/expertise";
   const isAboutPage = location.pathname === "/about";
   const isBlogPage = location.pathname === "/blog";
+  const isTourPackagesPage = location.pathname === "/tour-packages";
 
-  const solidNavbar =
-    pastHero || isBookingPage || isExpertisePage || isAboutPage || isBlogPage;
+  const forceSolidNavbar =
+    isBookingPage ||
+    isExpertisePage ||
+    isAboutPage ||
+    isBlogPage ||
+    isTourPackagesPage;
 
-  const sameNavFont = "font tracking-[-0.01em] font-sans";
-const topBarFont = "font tracking-[-0.01em] font-sans";
+  const solidNavbar = pastHero || forceSolidNavbar;
+
+  const sameNavFont = "font-semibold tracking-[-0.01em] font-sans";
+  const topBarFont = "font-bold tracking-[0.08em] font-sans";
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isBookingPage || isExpertisePage || isAboutPage || isBlogPage) {
+      if (forceSolidNavbar) {
         setPastHero(true);
         return;
       }
@@ -49,7 +55,7 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname, isBookingPage, isExpertisePage, isAboutPage, isBlogPage]);
+  }, [location.pathname, forceSolidNavbar]);
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -104,65 +110,63 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -105, opacity: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          className="fixed left-0 top-0 z-50 w-full"
+          className="fixed left-0 top-0 z-[999] w-full"
         >
           {/* Desktop Top Line */}
-{!isBookingPage && !isExpertisePage && !isAboutPage && !isBlogPage && (
-  <motion.div
-    animate={{
-      height: pastHero ? 0 : 30,
-      opacity: pastHero ? 0 : 1,
-      y: pastHero ? -14 : 0,
-    }}
-    transition={{ duration: 0.32, ease: "easeOut" }}
-    className="hidden overflow-hidden border-b border-white/10 bg-[#08233a]/92 text-white shadow-[0_10px_28px_rgba(7,21,34,0.22)] backdrop-blur-2xl md:block"
-  >
-    <div className="relative flex h-[30px] w-full items-center overflow-hidden px-5 text-[11px]">
-      {/* Constant Green Dot */}
-      <div className="absolute left-5 top-1/2 z-20 flex -translate-y-1/2 items-center">
-        <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-white/10">
-          <span className="absolute h-4 w-4 animate-ping rounded-full bg-green/25" />
-          <span className="relative h-2 w-2 rounded-full bg-green shadow-[0_0_12px_rgba(39,169,79,0.95)]" />
-        </span>
-      </div>
+          {!forceSolidNavbar && (
+            <motion.div
+              animate={{
+                height: pastHero ? 0 : 30,
+                opacity: pastHero ? 0 : 1,
+                y: pastHero ? -14 : 0,
+              }}
+              transition={{ duration: 0.32, ease: "easeOut" }}
+              className="hidden overflow-hidden border-b border-white/10 bg-[#08233a]/92 text-white shadow-[0_10px_28px_rgba(7,21,34,0.22)] backdrop-blur-2xl md:block"
+            >
+              <div className="relative flex h-[30px] w-full items-center overflow-hidden px-5 text-[11px]">
+                <div className="absolute left-5 top-1/2 z-20 flex -translate-y-1/2 items-center">
+                  <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-white/10">
+                    <span className="absolute h-4 w-4 animate-ping rounded-full bg-green/25" />
+                    <span className="relative h-2 w-2 rounded-full bg-green shadow-[0_0_12px_rgba(39,169,79,0.95)]" />
+                  </span>
+                </div>
 
-      {/* Moving Tagline Only - Stops Before Email Area */}
-      <div className="pointer-events-none absolute bottom-0 left-14 right-[500px] top-0 overflow-hidden">
-        <motion.div
-          animate={{ x: ["-100%", "100%"] }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className={`absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-white/95 ${topBarFont}`}
-        >
-          TRAVEL WITH EASE&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;TRAVEL WITH US
-        </motion.div>
-      </div>
+                <div className="pointer-events-none absolute bottom-0 left-14 right-[500px] top-0 overflow-hidden">
+                  <motion.div
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className={`absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-white/95 ${topBarFont}`}
+                  >
+                    TRAVEL WITH EASE&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;TRAVEL
+                    WITH US
+                  </motion.div>
+                </div>
 
-      {/* Right Contact Info */}
-      <div className="absolute right-5 top-0 z-30 flex h-[30px] shrink-0 items-center gap-4 bg-[#08233a]/95 pl-5 backdrop-blur-xl">
-        <a
-          href="mailto:info@aldaleeltravel.com"
-          className={`inline-flex items-center gap-2 text-white/95 transition hover:text-green ${topBarFont}`}
-        >
-          <FaEnvelope className="text-[10px] text-green" />
-          <span>Email:</span>
-          <span>info@aldaleeltravel.com</span>
-        </a>
+                <div className="absolute right-5 top-0 z-30 flex h-[30px] shrink-0 items-center gap-4 bg-[#08233a]/95 pl-5 backdrop-blur-xl">
+                  <a
+                    href="mailto:info@aldaleeltravel.com"
+                    className={`inline-flex items-center gap-2 text-white/95 transition hover:text-green ${topBarFont}`}
+                  >
+                    <FaEnvelope className="text-[10px] text-green" />
+                    <span>Email:</span>
+                    <span>info@aldaleeltravel.com</span>
+                  </a>
 
-        <a
-          href="tel:+966531314557"
-          className={`hidden items-center gap-2 text-white/95 transition hover:text-green lg:inline-flex ${topBarFont}`}
-        >
-          <FaPhoneAlt className="text-[10px] text-green" />
-          +966-53 1314557
-        </a>
-      </div>
-    </div>
-  </motion.div>
-)}
+                  <a
+                    href="tel:+966531314557"
+                    className={`hidden items-center gap-2 text-white/95 transition hover:text-green lg:inline-flex ${topBarFont}`}
+                  >
+                    <FaPhoneAlt className="text-[10px] text-green" />
+                    +966-53 1314557
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* Main Navbar */}
           <motion.nav
@@ -218,15 +222,19 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                   type="button"
                   onClick={() => setCompanyOpen((prev) => !prev)}
                   className={`group relative inline-flex items-center gap-2 py-2 text-[15px] ${sameNavFont} transition-all duration-300 ${
-                    isAboutPage ? "text-green" : "text-white/92 hover:text-green"
+                    isAboutPage
+                      ? "text-green"
+                      : "text-white/92 hover:text-green"
                   }`}
                 >
                   <span className={sameNavFont}>Company</span>
+
                   <FaChevronDown
                     className={`text-[11px] transition duration-300 ${
                       companyOpen ? "rotate-180" : ""
                     }`}
                   />
+
                   <span className={activeLineClass(isAboutPage)} />
                 </button>
 
@@ -249,10 +257,15 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                         </span>
 
                         <span>
-                          <span className={`block text-sm text-white ${sameNavFont}`}>
+                          <span
+                            className={`block text-sm text-white ${sameNavFont}`}
+                          >
                             About Us
                           </span>
-                          <span className={`mt-0.5 block text-[11px] text-white/50 ${sameNavFont}`}>
+
+                          <span
+                            className={`mt-0.5 block text-[11px] text-white/50 ${sameNavFont}`}
+                          >
                             Learn about Aldaleel
                           </span>
                         </span>
@@ -262,7 +275,10 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                 </AnimatePresence>
               </div>
 
-              <NavLink to="/blog" className={navLinkClass(isActiveLink("/blog"))}>
+              <NavLink
+                to="/blog"
+                className={navLinkClass(isActiveLink("/blog"))}
+              >
                 <span className={sameNavFont}>Blog</span>
                 <span className={activeLineClass(isActiveLink("/blog"))} />
               </NavLink>
@@ -298,7 +314,7 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                 transition={{ duration: 0.25 }}
                 className="mx-4 mt-3 overflow-hidden rounded-[1.5rem] border border-white/15 bg-[#08233a]/96 p-4 text-white shadow-premium backdrop-blur-2xl lg:hidden"
               >
-                {!isBookingPage && !isExpertisePage && !isAboutPage && !isBlogPage && (
+                {!forceSolidNavbar && (
                   <div className="mb-3 overflow-hidden rounded-2xl border border-white/10 bg-white/10 px-4 py-2.5 text-center text-xs text-white backdrop-blur-xl">
                     <motion.div
                       animate={{ x: ["-90%", "90%"] }}
@@ -331,7 +347,6 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                     Expertise
                   </Link>
 
-                  {/* Company Mobile Dropdown */}
                   <button
                     type="button"
                     onClick={() => setMobileCompanyOpen((prev) => !prev)}
@@ -342,6 +357,7 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                     }`}
                   >
                     <span className={sameNavFont}>Company</span>
+
                     <FaChevronDown
                       className={`text-xs transition duration-300 ${
                         mobileCompanyOpen ? "rotate-180" : ""
@@ -393,7 +409,7 @@ const topBarFont = "font tracking-[-0.01em] font-sans";
                       className={`mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-green px-4 py-3 text-center text-[15px] text-white ${sameNavFont}`}
                     >
                       Get Travel Quote
-                      <FaPlane className="rotate-350 text-xs" />
+                      <FaPlane className="rotate-360 text-xs" />
                     </Link>
                   )}
 

@@ -1,5 +1,10 @@
-import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigationType,
+} from "react-router-dom";
 import Lenis from "lenis";
 
 // Components
@@ -20,17 +25,104 @@ import ThankYou from "./pages/ThankYou";
 import ExpertisePage from "./pages/ExpertisePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import BlogPage from "./pages/BlogPage";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TourPackagesPage from "./pages/TourPackagesPage";
 
 function RouteTopScroll() {
   const location = useLocation();
+  const navigationType = useNavigationType();
+  const scrollPositions = useRef({});
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, [location.pathname]);
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentKey = location.key;
+
+    const getHeaderOffset = () => {
+      if (window.innerWidth >= 768) return 118;
+      return 96;
+    };
+
+    const scrollTo = (top = 0) => {
+      const finalTop = Math.max(0, top);
+
+      window.__lenis?.scrollTo?.(finalTop, {
+        immediate: true,
+        force: true,
+        offset: 0,
+      });
+
+      window.scrollTo({
+        top: finalTop,
+        left: 0,
+        behavior: "auto",
+      });
+    };
+
+    const scrollToHash = () => {
+      if (!location.hash) return false;
+
+      const id = decodeURIComponent(location.hash.replace("#", ""));
+      const target = document.getElementById(id);
+
+      if (!target) return false;
+
+      const top =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        getHeaderOffset();
+
+      scrollTo(top);
+      return true;
+    };
+
+    const restoreOrTop = () => {
+      if (location.hash) {
+        const scrolled = scrollToHash();
+
+        if (scrolled) return;
+      }
+
+      if (navigationType === "POP") {
+        const saved = scrollPositions.current[currentKey];
+
+        if (saved && typeof saved.y === "number") {
+          scrollTo(saved.y);
+          return;
+        }
+      }
+
+      scrollTo(0);
+    };
+
+    const timer1 = window.setTimeout(restoreOrTop, 80);
+    const timer2 = window.setTimeout(restoreOrTop, 280);
+    const timer3 = window.setTimeout(restoreOrTop, 650);
+    const timer4 = window.setTimeout(restoreOrTop, 1050);
+
+    return () => {
+      scrollPositions.current[currentKey] = {
+        x: window.scrollX,
+        y: window.scrollY,
+      };
+
+      window.clearTimeout(timer1);
+      window.clearTimeout(timer2);
+      window.clearTimeout(timer3);
+      window.clearTimeout(timer4);
+    };
+  }, [
+    location.key,
+    location.pathname,
+    location.search,
+    location.hash,
+    navigationType,
+  ]);
 
   return null;
 }
@@ -87,14 +179,22 @@ function App() {
       wheelMultiplier: 0.85,
     });
 
+    window.__lenis = lenis;
+
+    let rafId;
+
     const raf = (time) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     };
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      window.__lenis = null;
+    };
   }, []);
 
   return (
@@ -109,7 +209,10 @@ function App() {
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/expertise" element={<ExpertisePage />} />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/tour-packages" element={<TourPackagesPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
 
       <Footer />
