@@ -130,12 +130,12 @@ function RouteTopScroll() {
 function HomePage() {
   return (
     <>
-      <SEO
-        title="Aldaleel Travel & Tourism | Premium Travel Agency in Riyadh"
-        description="Aldaleel Travel & Tourism is a professional travel agency in Riyadh, Saudi Arabia offering flight bookings, visa guidance, hotel reservations, Smart Umrah, tours and transport arrangements."
-        keywords="Aldaleel Travel, travel agency Riyadh, travel agency Saudi Arabia, flights booking Riyadh, visa guidance Riyadh, hotel booking Riyadh, Smart Umrah, Umrah services Saudi Arabia, transport services Riyadh"
-        path="/"
-      />
+  <SEO
+  title="Aldaleel Travel & Tourism | Premium Travel Agency in Riyadh"
+  description="Professional travel agency in Saudi Arabia offering air ticketing, Smart Umrah, tour packages, hotel reservations, transport services and visa facilitation in Riyadh and beyond."
+  keywords="Aldaleel Travel, Aldaleel Travel and Tourism, travel agency, travel agency Saudi Arabia, travel agency Riyadh, air ticketing, flight booking Saudi Arabia, Smart Umrah, Umrah services, tour packages, hotel reservations, transport services, airport transfer, visa facilitation, visa assistance, travel consultant Saudi Arabia"
+  path="/"
+/>
 
       <Hero />
 
@@ -157,12 +157,12 @@ function HomePage() {
 function BookingPage() {
   return (
     <>
-      <SEO
-        title="Get Travel Quote | Aldaleel Travel & Tourism Riyadh"
-        description="Request a travel quote from Aldaleel Travel & Tourism for flights, visa guidance, hotel bookings, Smart Umrah, tours and transport arrangements."
-        keywords="get travel quote Riyadh, travel booking Riyadh, flight quote Saudi Arabia, Umrah package inquiry, visa guidance inquiry, Aldaleel Travel booking"
-        path="/booking"
-      />
+    <SEO
+  title="Get Travel Quote | Aldaleel Travel & Tourism"
+  description="Request a custom travel quote from Aldaleel Travel & Tourism for air ticketing, Smart Umrah, tour packages, hotel reservations, transport services and visa facilitation in Saudi Arabia."
+  keywords="get travel quote, travel quote Saudi Arabia, travel booking, travel booking Saudi Arabia, travel agency booking, air ticket booking, flight booking, Smart Umrah inquiry, Umrah travel quote, tour package inquiry, hotel reservation inquiry, transport booking, airport transfer booking, visa facilitation inquiry, visa assistance, Aldaleel Travel booking, Aldaleel Travel quote"
+  path="/booking"
+/>
 
       <div className="min-h-screen bg-[#f7fafc] pt-[92px] md:pt-[104px]">
         <BookingForm />

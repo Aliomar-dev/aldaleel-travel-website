@@ -33,13 +33,13 @@ const quickLinks = [
 const socialLinks = [
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/18x9XxeMB5/?mibextid=wwXIfr",
     icon: FaFacebookF,
     hover: "hover:border-[#1877F2] hover:bg-[#1877F2] hover:text-white",
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/aldaleel_travelandtourism?utm_source=qr",
     icon: FaInstagram,
     hover: "hover:border-[#E4405F] hover:bg-[#E4405F] hover:text-white",
   },
