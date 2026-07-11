@@ -1,11 +1,11 @@
 {
   "name": "Aldaleel Travel & Tourism",
   "short_name": "Aldaleel Travel",
-  "description": "Professional travel agency in Riyadh, Saudi Arabia offering Air Ticketing, Smart Umrah, Tour Packages, Hotel Reservations, Transport and Visa facilitation.",
+  "description": "Professional travel agency in Saudi Arabia offering air ticketing, Smart Umrah, tour packages, hotel reservations, transport services and visa facilitation in Riyadh and beyond.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#08233a",
+  "background_color": "#ffffff",
   "theme_color": "#27a94f",
   "icons": [
     {
