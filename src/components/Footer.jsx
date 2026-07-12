@@ -20,7 +20,7 @@ const address =
 const mapLink = "https://maps.app.goo.gl/L7VnDLCA3RifcYsa8";
 const reviewLink = "https://g.page/r/CUqiIlQhhGsrEAE/review";
 
-const developerName = "HD labz";
+const developerName = "{HD} Code Lab";
 const developerEmail = "omar786.official@gmail.com";
 
 const quickLinks = [
@@ -50,6 +50,10 @@ const socialLinks = [
     hover: "hover:border-[#25D366] hover:bg-[#25D366] hover:text-white",
   },
 ];
+
+
+
+
 
 const Footer = () => {
   return (
@@ -453,51 +457,54 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/14 to-transparent" />
+       {/* Bottom */}
+<div className="h-px bg-gradient-to-r from-transparent via-white/14 to-transparent" />
 
-        <div className="flex flex-col gap-2 py-3.5 text-xs font-bold tracking-[-0.01em] text-white/45 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} Aldaleel Travel & Tourism. All rights
-            reserved.
-          </p>
+<div className="flex flex-col items-center gap-3 py-3.5 text-center text-xs font-bold tracking-[-0.01em] text-white/45 md:flex-row md:justify-between md:text-left">
+  <p className="w-full md:w-auto">
+    © {new Date().getFullYear()} Aldaleel Travel & Tourism. All rights reserved.
+  </p>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Link
-              to="/terms-and-conditions"
-              className="transition hover:text-green"
-            >
-              Terms & Conditions
-            </Link>
+  <div className="flex w-full flex-wrap items-center justify-center gap-3 md:w-auto md:justify-end">
+    <Link
+      to="/terms-and-conditions"
+      className="transition hover:text-green"
+    >
+      Terms & Conditions
+    </Link>
 
-            <span className="h-1 w-1 rounded-full bg-white/25" />
+    <span className="h-1 w-1 rounded-full bg-white/25" />
 
-            <Link to="/privacy-policy" className="transition hover:text-green">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
+    <Link
+      to="/privacy-policy"
+      className="transition hover:text-green"
+    >
+      Privacy Policy
+    </Link>
+  </div>
+</div>
 
         {/* Developer Credit */}
-        <div className="pb-3.5 text-center">
-          <a
-            href={`mailto:${developerEmail}`}
-            className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold tracking-[-0.01em] text-white/42 transition hover:border-green/25 hover:bg-green/10 hover:text-white"
-          >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green/12 text-green">
-              <FaCode className="text-[9px]" />
-            </span>
+<div className="pb-3.5 text-center">
+  <a
+    href={`mailto:${developerEmail}`}
+    aria-label="Contact {HD> Code Lab"
+    className="group inline-flex items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold tracking-[-0.01em] text-white/45 transition-all duration-300 hover:-translate-y-0.5 hover:border-green/30 hover:bg-green/10 hover:text-white hover:shadow-[0_12px_32px_rgba(39,169,79,0.12)]"
+  >
+    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-green/12 text-green transition-all duration-300 group-hover:bg-green group-hover:text-white">
+      <FaCode className="text-[9px]" />
+    </span>
 
-            <span>
-              Developed by{" "}
-              <span className="font-extrabold text-white/65 transition group-hover:text-green">
-                {developerName}
-              </span>
-            </span>
+    <span>
+      Designed &amp; Developed by {" "}
+      <span className="font-extrabold text-white/75 transition-colors duration-300 group-hover:text-green">
+        {developerName}
+      </span>
+    </span>
 
-            <FaEnvelope className="text-[9px] opacity-50 transition group-hover:text-green group-hover:opacity-100" />
-          </a>
-        </div>
+    <FaEnvelope className="text-[9px] text-white/35 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-green group-hover:opacity-100" />
+  </a>
+</div>
       </div>
     </footer>
   );
