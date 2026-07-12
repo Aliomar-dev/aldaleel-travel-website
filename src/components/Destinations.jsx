@@ -120,9 +120,17 @@ const destinations = [
 
 const Destinations = () => {
   const navigate = useNavigate();
-  const hasStartedFromMadinah = useRef(false);
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const savedIndex = Number(
+      sessionStorage.getItem("aldaleel-destination-index")
+    );
 
-  const [activeIndex, setActiveIndex] = useState(0);
+    return Number.isInteger(savedIndex) &&
+      savedIndex >= 0 &&
+      savedIndex < destinations.length
+      ? savedIndex
+      : 0;
+  });
   const [timerKey, setTimerKey] = useState(0);
   const [imageAttempt, setImageAttempt] = useState(0);
   const [showImageFallback, setShowImageFallback] = useState(false);
@@ -138,15 +146,6 @@ const Destinations = () => {
   const resetImage = () => {
     setImageAttempt(0);
     setShowImageFallback(false);
-  };
-
-  const startFromMadinahOnlyFirstTime = () => {
-    if (hasStartedFromMadinah.current) return;
-
-    hasStartedFromMadinah.current = true;
-    setActiveIndex(0);
-    resetImage();
-    setTimerKey((prev) => prev + 1);
   };
 
   const changeDestination = (index) => {
@@ -189,6 +188,13 @@ const Destinations = () => {
 
     navigate("/tour-packages?back=destinations");
   };
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      "aldaleel-destination-index",
+      String(activeIndex)
+    );
+  }, [activeIndex]);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -260,7 +266,6 @@ const Destinations = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          onViewportEnter={startFromMadinahOnlyFirstTime}
           viewport={{ once: false, amount: 0.25 }}
           transition={{ duration: 0.65 }}
           className="relative overflow-visible rounded-[1.55rem] border border-slate-100 bg-white p-2 shadow-[0_30px_90px_rgba(16,32,51,0.10)] sm:rounded-[2.2rem] sm:p-4 md:rounded-[2.6rem]"

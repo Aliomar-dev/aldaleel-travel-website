@@ -249,7 +249,7 @@ const isAboutPage =
                       className="absolute left-1/2 top-full mt-4 w-[220px] -translate-x-1/2 overflow-hidden rounded-[1.25rem] border border-white/12 bg-[#08233a]/96 p-2 text-white shadow-[0_24px_70px_rgba(7,21,34,0.28)] backdrop-blur-2xl"
                     >
                       <Link
-                        to="/about"
+                        to="/company/about-us"
                         onClick={() => setCompanyOpen(false)}
                         className="group/drop flex items-center gap-3 rounded-[1rem] px-4 py-3 transition hover:bg-white/10"
                       >

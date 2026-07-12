@@ -13,39 +13,70 @@ import Testimonials from "../components/Testimonials";
 const HomePage = () => {
 
           <PageSeo page="home" />
-
 useEffect(() => {
-    console.log(sessionStorage.getItem("scrollToSection"));
-  const sectionId = sessionStorage.getItem("scrollToSection");
+  let timeoutId;
+  let secondTimeoutId;
+  let frameId;
 
-  if (!sectionId) {
-    return;
-  }
+  const restoreSection = () => {
+    const sectionId = sessionStorage.getItem("scrollToSection");
 
-  sessionStorage.removeItem("scrollToSection");
+    if (!sectionId) return;
 
-  const timer = setTimeout(() => {
-    const section = document.getElementById(sectionId);
+    const scrollToTarget = () => {
+      const section = document.getElementById(sectionId);
 
-    if (!section) return;
+      if (!section) return;
 
-    const top =
-      section.getBoundingClientRect().top +
-      window.pageYOffset -
-      110;
+      const navbarOffset = window.innerWidth >= 768 ? 104 : 86;
+      const targetTop = Math.max(section.offsetTop - navbarOffset, 0);
 
-    window.__lenis?.scrollTo(top, {
-      immediate: true,
-      force: true,
+      window.__lenis?.start?.();
+
+      if (window.__lenis) {
+        window.__lenis.scrollTo(targetTop, {
+          immediate: true,
+          force: true,
+          offset: 0,
+        });
+      }
+
+      window.scrollTo({
+        top: targetTop,
+        left: 0,
+        behavior: "auto",
+      });
+
+      secondTimeoutId = window.setTimeout(() => {
+        window.scrollTo({
+          top: targetTop,
+          left: 0,
+          behavior: "auto",
+        });
+
+        sessionStorage.removeItem("scrollToSection");
+      }, 250);
+    };
+
+    frameId = window.requestAnimationFrame(() => {
+      timeoutId = window.setTimeout(scrollToTarget, 180);
     });
+  };
 
-    window.scrollTo({
-      top,
-      behavior: "auto",
-    });
-  }, 300);
+  restoreSection();
 
-  return () => clearTimeout(timer);
+  const handlePageShow = () => {
+    restoreSection();
+  };
+
+  window.addEventListener("pageshow", handlePageShow);
+
+  return () => {
+    window.removeEventListener("pageshow", handlePageShow);
+    window.cancelAnimationFrame(frameId);
+    window.clearTimeout(timeoutId);
+    window.clearTimeout(secondTimeoutId);
+  };
 }, []);
 
 

@@ -28,10 +28,11 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+
 const companyHighlights = [
   {
-    title: "Riyadh Travel Hub",
-    desc: "Smooth KSA Journeys",
+    title: "Travel Hub",
+    desc: "Smooth Journeys",
     icon: FaMapMarkerAlt,
   },
   {
@@ -133,7 +134,7 @@ const processSteps = [
 
 const agencyImages = [
   {
-    src: "/agency/office-main.jpg",
+    src: "/agency/office-main.png",
     alt: "Aldaleel Travel & Tourism office in Riyadh",
     label: "Our Office",
     className: "sm:col-span-2 sm:row-span-2",
@@ -142,55 +143,93 @@ const agencyImages = [
     src: "/agency/team-support.jpg",
     alt: "Aldaleel Travel customer support team",
     label: "Travel Support",
-    className: "",
+    className: "sm:col-span-2",
   },
   {
-    src: "/agency/consultation.jpg",
-    alt: "Travel consultation at Aldaleel Travel & Tourism",
-    label: "Client Consultation",
-    className: "",
-  },
-  {
-    src: "/agency/workspace.jpg",
+    src: "/agency/workspace.jpeg",
     alt: "Aldaleel Travel professional workspace",
     label: "Professional Workspace",
     className: "sm:col-span-2",
   },
 ];
 
-const SectionBadge = ({ children, icon: Icon = FaCheckCircle, dark = false }) => {
+const WaveBadge = ({
+  children,
+  icon: Icon,
+  variant = "light",
+  dot = false,
+}) => {
+  const badgeRef = useRef(null);
+
+  const isInView = useInView(badgeRef, {
+    once: false,
+    amount: 0.6,
+  });
+
+  const isDark = variant === "dark";
+
   return (
     <div
-      className={`relative mb-3 inline-flex items-center gap-3 overflow-hidden rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] shadow-[0_12px_34px_rgba(16,32,51,0.06)] backdrop-blur-xl sm:text-xs ${
-        dark
-          ? "border-white/10 bg-white/8 text-green"
-          : "border-green/15 bg-white/85 text-green"
+      ref={badgeRef}
+      className={`relative mb-3 inline-flex items-center gap-3 overflow-hidden rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_12px_34px_rgba(16,32,51,0.055)] backdrop-blur-xl sm:text-xs ${
+        isDark
+          ? "border-white/10 bg-white/10 text-green"
+          : "border-green/15 bg-white/90 text-green"
       }`}
     >
       <motion.span
+        key={isInView ? "wave-active" : "wave-stopped"}
         aria-hidden="true"
-        animate={{ x: ["-140%", "160%"] }}
-        transition={{
-          duration: 2.8,
-          repeat: Infinity,
-          repeatDelay: 2.4,
-          ease: "easeInOut",
+        initial={{
+          x: "-150%",
+          opacity: 0,
         }}
-        className={`pointer-events-none absolute inset-y-0 left-0 w-1/2 ${
-          dark
-            ? "bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]"
-            : "bg-[linear-gradient(90deg,transparent,rgba(39,169,79,0.16),transparent)]"
+        animate={
+          isInView
+            ? {
+                x: ["-150%", "190%"],
+                opacity: [0, 0.9, 0],
+              }
+            : {
+                x: "-150%",
+                opacity: 0,
+              }
+        }
+        transition={
+          isInView
+            ? {
+                duration: 1.5,
+                repeat: Infinity,
+                repeatDelay: 1.5,
+                ease: "easeInOut",
+              }
+            : {
+                duration: 0,
+              }
+        }
+        className={`pointer-events-none absolute inset-y-0 left-0 z-0 w-[55%] ${
+          isDark
+            ? "bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.28),transparent)]"
+            : "bg-[linear-gradient(90deg,transparent,rgba(39,169,79,0.24),transparent)]"
         }`}
       />
 
-      <span
-        className={`relative z-10 flex h-8 w-8 items-center justify-center rounded-full ${
-          dark ? "bg-white/10" : "bg-green/10"
-        }`}
-      >
-        <span className="absolute inset-0 rounded-full bg-green/10 blur-md" />
-        <Icon className="relative z-10 text-[13px] text-green" />
-      </span>
+      {dot ? (
+        <span className="relative z-10 flex h-2.5 w-2.5 shrink-0">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-40" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_14px_rgba(39,169,79,0.75)]" />
+        </span>
+      ) : (
+        Icon && (
+          <span
+            className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+              isDark ? "bg-white/10" : "bg-green/10"
+            }`}
+          >
+            <Icon className="text-[13px] text-green" />
+          </span>
+        )
+      )}
 
       <span className="relative z-10">{children}</span>
     </div>
@@ -272,22 +311,10 @@ const AboutUsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.58, ease: "easeOut" }}
           >
-            <div className="relative mb-4 inline-flex items-center gap-3 overflow-hidden rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-green shadow-[0_12px_34px_rgba(16,32,51,0.055)] backdrop-blur-xl sm:text-xs">
-              <motion.span
-                aria-hidden="true"
-                animate={{ x: ["-140%", "160%"] }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                  repeatDelay: 2.2,
-                  ease: "easeInOut",
-                }}
-                className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(39,169,79,0.16),transparent)]"
-              />
-
-              <span className="relative z-10 flex h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_14px_rgba(39,169,79,0.75)]" />
-              <span className="relative z-10">About Us</span>
-            </div>
+        
+        <div className="mb-4">
+  <WaveBadge dot>About Us</WaveBadge>
+</div>
 
             <h1 className="max-w-4xl text-[36px] font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
               Your reliable partner for{" "}
@@ -320,12 +347,15 @@ const AboutUsPage = () => {
                   >
                     <motion.span
                       aria-hidden="true"
-                      animate={{ x: ["-140%", "160%"] }}
+                      initial={{ x: "-140%", opacity: 0 }}
+                      whileInView={{
+                        x: "180%",
+                        opacity: [0, 1, 0],
+                      }}
+                      viewport={{ once: false, amount: 0.75 }}
                       transition={{
-                        duration: 2.7,
-                        repeat: Infinity,
-                        repeatDelay: 2.5,
-                        delay: index * 0.25,
+                        duration: 1.15,
+                        delay: index * 0.22,
                         ease: "easeInOut",
                       }}
                       className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(39,169,79,0.14),transparent)]"
@@ -460,21 +490,9 @@ const AboutUsPage = () => {
               <div className="absolute -right-14 -top-14 h-36 w-36 rounded-full bg-green/15 blur-3xl" />
 
               <div className="relative z-10">
-                <div className="relative mb-4 inline-flex items-center gap-3 overflow-hidden rounded-full border border-green/15 bg-white px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-green shadow-[0_12px_30px_rgba(16,32,51,0.055)]">
-                  <motion.span
-                    aria-hidden="true"
-                    animate={{ x: ["-140%", "160%"] }}
-                    transition={{
-                      duration: 2.8,
-                      repeat: Infinity,
-                      repeatDelay: 2.4,
-                      ease: "easeInOut",
-                    }}
-                    className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(39,169,79,0.16),transparent)]"
-                  />
-                  <FaSignature className="relative z-10" />
-                  <span className="relative z-10">CEO Signature</span>
-                </div>
+            <div className="mb-4">
+  <WaveBadge icon={FaSignature}>CEO Signature</WaveBadge>
+</div>
 
                 <h3 className="text-2xl font-black tracking-tight md:text-3xl">
                   Leading Aldaleel with clarity, trust and service excellence.
@@ -518,7 +536,7 @@ const AboutUsPage = () => {
         >
           <div className="grid gap-5 md:grid-cols-[280px_1fr] md:items-start">
             <div>
-              <SectionBadge icon={FaBuilding}>Overview</SectionBadge>
+              <WaveBadge icon={FaBuilding}>Overview</WaveBadge>
 
               <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
                 Who we are
@@ -559,9 +577,9 @@ const AboutUsPage = () => {
     transition={{ duration: 0.55 }}
     className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,#071522_0%,#08233A_58%,#0f3b35_100%)] p-6 text-white shadow-[0_22px_70px_rgba(8,35,58,0.22)] md:p-8"
   >
-    <SectionBadge icon={FaEye} dark>
+    <WaveBadge icon={FaEye} variant="dark">
       Our Vision
-    </SectionBadge>
+    </WaveBadge>
 
     <p className="mt-3 text-sm font-semibold leading-7 text-white/72 sm:text-base sm:leading-8">
       To become a trusted and recognized travel agency in Riyadh and across
@@ -577,9 +595,9 @@ const AboutUsPage = () => {
     transition={{ duration: 0.55, delay: 0.08 }}
     className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,#071522_0%,#08233A_58%,#0f3b35_100%)] p-6 text-white shadow-[0_22px_70px_rgba(8,35,58,0.22)] md:p-8"
   >
-    <SectionBadge icon={FaBullseye} dark>
+    <WaveBadge icon={FaBullseye} variant="dark">
       Our Mission
-    </SectionBadge>
+    </WaveBadge>
 
     <p className="mt-3 text-sm font-semibold leading-7 text-white/72 sm:text-base sm:leading-8">
       To simplify travel planning by providing organized assistance, honest
@@ -590,60 +608,60 @@ const AboutUsPage = () => {
   </motion.div>
 </div>
 
-        {/* Why Choose Us */}
+       {/* Why Choose Us */}
+<motion.div
+  initial={{ opacity: 0, y: 26 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.22 }}
+  transition={{ duration: 0.55 }}
+  className="mt-10"
+>
+  <div className="mb-5 max-w-3xl">
+    <WaveBadge icon={FaShieldAlt}>Why Choose Us</WaveBadge>
+
+    <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
+      A travel partner focused on clarity and comfort
+    </h2>
+
+    <p className="mt-3 text-sm font-semibold leading-7 text-slate-600 sm:text-base">
+      Customers choose Aldaleel because our service is built around guidance,
+      reliability and a smooth travel experience.
+    </p>
+  </div>
+
+  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {whyChooseUs.map((item, index) => {
+      const Icon = item.icon;
+
+      return (
         <motion.div
-          initial={{ opacity: 0, y: 26 }}
+          key={item.title}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.55 }}
-          className="mt-10"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.45, delay: index * 0.05 }}
+          className="group relative overflow-hidden rounded-[1.6rem] border border-green/15 bg-[linear-gradient(135deg,#f4fff7_0%,#e8f9ed_50%,#d9f3e1_100%)] p-5 text-navy shadow-[0_20px_55px_rgba(39,169,79,0.12)] transition hover:-translate-y-1 hover:border-green/25 hover:shadow-[0_28px_75px_rgba(39,169,79,0.2)]"
         >
-          <div className="mb-5 max-w-3xl">
-            <SectionBadge icon={FaShieldAlt}>Why Choose Us</SectionBadge>
+          <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green/12 blur-3xl transition group-hover:bg-green/20" />
 
-            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
-              A travel partner focused on clarity and comfort
-            </h2>
+          <div className="relative z-10">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green/12 text-xl text-green transition group-hover:bg-green group-hover:text-white">
+              <Icon />
+            </div>
 
-            <p className="mt-3 text-sm font-semibold leading-7 text-slate-600 sm:text-base">
-              Customers choose Aldaleel because our service is built around
-              guidance, reliability and a smooth travel experience.
+            <h3 className="mt-4 text-lg font-black text-navy">
+              {item.title}
+            </h3>
+
+            <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
+              {item.desc}
             </p>
           </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChooseUs.map((item, index) => {
-              const Icon = item.icon;
-
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="group relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-[linear-gradient(135deg,#071522_0%,#08233a_56%,#12365f_100%)] p-5 text-white shadow-[0_22px_65px_rgba(8,35,58,0.18)] transition hover:-translate-y-1 hover:shadow-[0_30px_85px_rgba(8,35,58,0.26)]"
-                >
-                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-green/16 blur-3xl transition group-hover:bg-green/25" />
-
-                  <div className="relative z-10">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-xl text-green transition group-hover:bg-green group-hover:text-white">
-                      <Icon />
-                    </div>
-
-                    <h3 className="mt-4 text-lg font-black text-white">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-2 text-sm font-semibold leading-6 text-white/66">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
         </motion.div>
+      );
+    })}
+  </div>
+</motion.div>
 
        {/* Our Approach */}
 <motion.div
@@ -656,7 +674,7 @@ const AboutUsPage = () => {
   <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
     {/* Left Content */}
     <div className="self-start">
-      <SectionBadge icon={FaRoute}>Our Approach</SectionBadge>
+      <WaveBadge icon={FaRoute}>Our Approach</WaveBadge>
 
       <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
         How we help our customers
@@ -713,9 +731,9 @@ const AboutUsPage = () => {
 >
   <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
     <div>
-      <SectionBadge icon={FaPlane} dark>
+      <WaveBadge icon={FaPlane} variant="dark">
         What We Do
-      </SectionBadge>
+      </WaveBadge>
 
       <h2 className="mt-2 text-3xl font-black tracking-tight text-white md:text-4xl">
         Travel services we provide
@@ -780,7 +798,7 @@ const AboutUsPage = () => {
   {/* Agency Gallery Header */}
   <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
     <div>
-      <SectionBadge icon={FaImages}>Inside Our Agency</SectionBadge>
+      <WaveBadge icon={FaImages}>Inside Our Agency</WaveBadge>
 
       <h2 className="mt-1 text-2xl font-black tracking-tight text-navy sm:text-3xl md:text-4xl">
         Meet the space behind every journey
@@ -799,20 +817,26 @@ const AboutUsPage = () => {
   </div>
 
   {/* Agency Images */}
-  <div className="grid auto-rows-[150px] gap-3 sm:grid-cols-2 sm:auto-rows-[175px] lg:grid-cols-4">
-    {agencyImages.map((image, index) => (
+<div className="grid gap-4 lg:grid-cols-[1.05fr_1fr]">
+  {agencyImages.map((image, index) => {
+    const isOffice = image.label === "Our Office";
+    const isTravelSupport = image.label === "Travel Support";
+
+    return (
       <motion.figure
         key={image.src}
-        initial={{ opacity: 0, y: 18, scale: 0.98 }}
+        initial={{ opacity: 0, y: 20, scale: 0.985 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{
-          duration: 0.45,
-          delay: index * 0.06,
-          ease: "easeOut",
+          duration: 0.55,
+          delay: index * 0.08,
+          ease: [0.22, 1, 0.36, 1],
         }}
-        className={`group relative overflow-hidden rounded-[1.3rem] border border-white bg-[#071522] shadow-[0_14px_45px_rgba(8,35,58,0.12)] ${
-          image.className
+        className={`group relative overflow-hidden rounded-[1.7rem] border border-white/80 bg-[#071522] shadow-[0_22px_65px_rgba(8,35,58,0.16)] ${
+          isOffice
+            ? "h-[420px] sm:h-[500px] lg:row-span-2 lg:h-full"
+            : "h-[230px] sm:h-[260px]"
         }`}
       >
         <motion.img
@@ -820,34 +844,57 @@ const AboutUsPage = () => {
           alt={image.alt}
           loading="lazy"
           decoding="async"
-          whileHover={{ scale: 1.06 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="h-full w-full object-cover"
+          whileHover={{ scale: 1.055 }}
+          transition={{
+            duration: 0.65,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className={`absolute inset-0 h-full w-full object-cover ${
+            isOffice
+              ? "object-center"
+              : isTravelSupport
+                ? "object-[center_35%]"
+                : "object-center"
+          }`}
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_32%,rgba(7,21,34,0.9)_100%)]" />
+        {/* Premium Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,21,34,0.04)_20%,rgba(7,21,34,0.18)_58%,rgba(7,21,34,0.92)_100%)]" />
 
-        <figcaption className="absolute bottom-0 left-0 right-0 flex items-center justify-between gap-3 p-3.5">
-          <span className="text-xs font-black text-white sm:text-sm">
-            {image.label}
-          </span>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(39,169,79,0.16),transparent_26%)] opacity-70" />
 
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-green backdrop-blur-xl transition group-hover:bg-green group-hover:text-white">
-            <FaPlane className="rotate-360 text-[9px]" />
+        {/* Bottom Content */}
+        <figcaption className="absolute bottom-0 left-0 right-0 flex items-center justify-between gap-4 p-5 sm:p-6">
+          <div>
+            <span className="mb-1 block text-[9px] font-black uppercase tracking-[0.2em] text-green sm:text-[10px]">
+              Aldaleel Travel & Tourism
+            </span>
+
+            <h3 className="text-base font-black text-white sm:text-lg">
+              {image.label}
+            </h3>
+          </div>
+
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-green shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-green group-hover:text-white">
+            <FaPlane className="rotate-360 text-[11px]" />
           </span>
         </figcaption>
+
+        {/* Border Shine */}
+        <div className="pointer-events-none absolute inset-0 rounded-[1.7rem] ring-1 ring-inset ring-white/10 transition group-hover:ring-green/30" />
       </motion.figure>
-    ))}
-  </div>
+    );
+  })}
+</div>
 
   {/* Contact Strip */}
   <div className="mt-5 overflow-hidden rounded-[1.6rem] bg-[linear-gradient(135deg,#071522_0%,#08233a_58%,#0f3b35_100%)] p-4 text-white shadow-[0_22px_65px_rgba(7,21,34,0.18)] sm:p-5">
     <div className="grid gap-5 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
       {/* Contact Intro */}
       <div>
-        <SectionBadge icon={FaEnvelope} dark>
+        <WaveBadge icon={FaEnvelope} variant="dark">
           Contact Aldaleel
-        </SectionBadge>
+        </WaveBadge>
 
         <h3 className="mt-1 text-2xl font-black tracking-tight sm:text-3xl">
           Plan your next journey with us
