@@ -2,17 +2,15 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { FaCheckCircle, FaPlane, FaHome } from "react-icons/fa";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 
 const ThankYou = () => {
+
+        <PageSeo page="thankYou" />
+
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#071522] px-5 pt-28 text-white">
-
-<SEO
-  title="Thank You | Aldaleel Travel & Tourism"
-  description="Thank you for contacting Aldaleel Travel & Tourism."
-  path="/thank-you"
-  noIndex={true}
-/>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(39,169,79,0.22),transparent_32%),linear-gradient(180deg,#071522_0%,#06111d_100%)]" />
 

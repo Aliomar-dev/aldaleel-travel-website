@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 import {
   FaNewspaper,
   FaExternalLinkAlt,
@@ -361,6 +363,10 @@ const getSourceBadge = (source = "") => {
 };
 
 const BlogPage = () => {
+
+      <PageSeo page="blog" />
+
+
   const [updates, setUpdates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState("");
@@ -467,13 +473,6 @@ const BlogPage = () => {
   return (
     
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
-
-<SEO
-  title="Travel Blog | Aldaleel Travel & Tourism"
-  description="Read helpful travel tips, visa guidance, Umrah planning advice, flight booking tips and Saudi travel updates from Aldaleel Travel & Tourism."
-  keywords="travel blog Saudi Arabia, Riyadh travel tips, Umrah travel tips, visa guidance blog, flight booking tips, Aldaleel Travel blog"
-  path="/blog"
-/>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(39,169,79,0.12),transparent_27%),radial-gradient(circle_at_88%_16%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_46%,#ffffff_100%)]" />
 

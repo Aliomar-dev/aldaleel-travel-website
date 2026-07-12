@@ -265,28 +265,65 @@ const Destinations = () => {
           transition={{ duration: 0.65 }}
           className="relative overflow-visible rounded-[1.55rem] border border-slate-100 bg-white p-2 shadow-[0_30px_90px_rgba(16,32,51,0.10)] sm:rounded-[2.2rem] sm:p-4 md:rounded-[2.6rem]"
         >
-          <button
-            type="button"
-            onClick={openTourPackages}
-            className="group absolute -right-4 top-1/2 z-30 flex -translate-y-1/2 flex-col items-center overflow-hidden rounded-full border border-white/25 bg-[#071522]/72 px-2 py-3 text-white shadow-[0_22px_60px_rgba(16,32,51,0.24)] backdrop-blur-2xl transition hover:-translate-y-[52%] hover:bg-green/90 hover:shadow-[0_24px_70px_rgba(39,169,79,0.25)] sm:-right-5 sm:px-2.5 sm:py-4 lg:-right-4 lg:bg-[#071522]/92"
-            aria-label="Open tour packages"
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green/15 text-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] transition group-hover:bg-white/18 group-hover:text-white sm:h-9 sm:w-9">
-              <FaPlane className="rotate-360 text-xs sm:text-sm" />
-            </span>
+      <button
+  type="button"
+  onClick={openTourPackages}
+  className="
+    group absolute z-30 flex flex-col items-center overflow-hidden
+    rounded-full border border-white/25
+    bg-[#071522]/92
+    text-white
+    shadow-[0_22px_60px_rgba(16,32,51,0.24)]
+    backdrop-blur-2xl
+    transition-all duration-300
 
-            <span className="mt-2 h-8 w-px rounded-full bg-white/32 transition group-hover:bg-white/50 sm:mt-3 sm:h-10" />
+    /* Mobile */
+    right-3
+    top-[67%]
+    -translate-y-1/2
+    px-2 py-3
 
-            <span className="my-2 text-center text-[9px] font-black uppercase leading-none tracking-[0.16em] [writing-mode:vertical-rl] sm:my-3 sm:text-[10px] sm:tracking-[0.2em]">
-              Tour Packages
-            </span>
+    /* Desktop */
+    md:-right-5
+    md:top-1/2
+    md:-translate-y-1/2
+    md:px-2.5
+    md:py-4
 
-            <span className="mb-2 h-8 w-px rounded-full bg-white/32 transition group-hover:bg-white/50 sm:mb-3 sm:h-10" />
+    hover:bg-green/90
+    hover:shadow-[0_24px_70px_rgba(39,169,79,0.25)]
+  "
+  aria-label="Open tour packages"
+>
+  {/* Top Plane */}
+  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green/15">
+    <motion.div
+      whileHover={{}}
+      className="text-white transition-transform duration-500 group-hover:translate-x-3"
+    >
+      <FaPlane className="text-xs" />
+    </motion.div>
+  </span>
 
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] transition group-hover:bg-white/18 group-hover:text-white sm:h-8 sm:w-8">
-              <FaPlane className="rotate-360 text-[10px] sm:text-xs" />
-            </span>
-          </button>
+  <span className="mt-2 h-8 w-px bg-white/30 transition-colors duration-300 group-hover:bg-white/50" />
+
+  {/* Text */}
+  <span className="my-2 text-[9px] font-black uppercase tracking-[0.18em] text-green transition-all duration-300 [writing-mode:vertical-rl] group-hover:text-white group-hover:text-[10px] group-hover:tracking-[0.22em]">
+    Tour Packages
+  </span>
+
+  <span className="mb-2 h-8 w-px bg-white/30 transition-colors duration-300 group-hover:bg-white/50" />
+
+  {/* Bottom Plane */}
+  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10">
+    <motion.div
+      whileHover={{}}
+      className="text-white transition-transform duration-500 group-hover:translate-x-3"
+    >
+      <FaPlane className="text-xs" />
+    </motion.div>
+  </span>
+</button>
 
           <div className="relative min-h-[610px] overflow-hidden rounded-[1.25rem] bg-[#071522] sm:min-h-[590px] sm:rounded-[1.8rem] md:min-h-[560px] md:rounded-[2.1rem]">
             <AnimatePresence mode="wait">

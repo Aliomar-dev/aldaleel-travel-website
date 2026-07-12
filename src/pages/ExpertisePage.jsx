@@ -96,6 +96,10 @@ const SectionBadge = ({ children }) => {
 };
 
 const ExpertisePage = () => {
+
+      <PageSeo page="expertise" />
+
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const passRef = useRef(null);
@@ -116,35 +120,9 @@ const ExpertisePage = () => {
     }, 80);
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const backSection = params.get("back") || "services";
-
-    window.history.pushState(
-      { aldaleelExpertiseBackGuard: true },
-      "",
-      `${location.pathname}${location.search}`
-    );
-
-    const handleBrowserBack = () => {
-      navigate(`/#${backSection}`, { replace: true });
-    };
-
-    window.addEventListener("popstate", handleBrowserBack);
-
-    return () => {
-      window.removeEventListener("popstate", handleBrowserBack);
-    };
-  }, [location.pathname, location.search, navigate]);
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
-      <SEO
-        title="Travel Services in Riyadh | Flights, Umrah, Tours, Visa & Hotels"
-        description="Explore Aldaleel Travel & Tourism services including air ticketing, Smart Umrah, tour packages, hotel reservations, transport services and visa facilitation in Riyadh."
-        keywords="travel services Riyadh, tour packages Riyadh, flight booking Riyadh, visa guidance Saudi Arabia, hotel reservation Riyadh, Smart Umrah services, Umrah travel agency Riyadh, transport arrangements Saudi Arabia"
-        path="/expertise"
-      />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(39,169,79,0.12),transparent_25%),radial-gradient(circle_at_88%_15%,rgba(8,35,58,0.09),transparent_24%),linear-gradient(180deg,#ffffff_0%,#f7fafc_42%,#ffffff_100%)]" />
 

@@ -8,44 +8,24 @@ import {
   FaSuitcaseRolling,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 
 const isTourPackagesPage = location.pathname === "/tour-packages";
 
 
 const TourPackagesPage = () => {
+
+      <PageSeo page="tourPackages" />
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const backSection = params.get("back") || "destinations";
-
-    window.history.pushState(
-      { aldaleelTourBackGuard: true },
-      "",
-      `${location.pathname}${location.search}`
-    );
-
-    const handleBrowserBack = () => {
-      navigate(`/#${backSection}`, { replace: true });
-    };
-
-    window.addEventListener("popstate", handleBrowserBack);
-
-    return () => {
-      window.removeEventListener("popstate", handleBrowserBack);
-    };
-  }, [location.pathname, location.search, navigate]);
+  
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7fafc] pt-[92px] text-navy md:pt-[104px]">
-      <SEO
-        title="Tour Packages | Aldaleel Travel & Tourism"
-        description="Aldaleel Travel & Tourism tour packages will be visible soon with professional travel options for families, groups and business travelers."
-        keywords="Aldaleel tour packages, tour packages Riyadh, travel packages Saudi Arabia, family tour packages, international tour packages"
-        path="/tour-packages"
-      />
-
+    
       <section className="relative flex min-h-[calc(100vh-92px)] items-center px-5 py-16 md:min-h-[calc(100vh-104px)] md:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(39,169,79,0.20),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(8,35,58,0.14),transparent_30%),linear-gradient(180deg,#ffffff_0%,#f7fafc_55%,#ffffff_100%)]" />
 

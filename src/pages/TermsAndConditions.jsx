@@ -9,6 +9,8 @@ import {
   FaShieldAlt,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 
 const email = "info@aldaleeltravel.com";
 const phone = "+966-53 1314557";
@@ -53,14 +55,11 @@ const sections = [
 ];
 
 const TermsAndConditions = () => {
+
+        <PageSeo page="thankYou" />
+
   return (
     <main className="min-h-screen bg-[#f7fafc] text-navy">
-      <SEO
-        title="Terms & Conditions | Aldaleel Travel & Tourism"
-        description="Read the website terms and conditions for Aldaleel Travel & Tourism services, inquiries, bookings and customer responsibilities."
-        keywords="Aldaleel Travel terms, travel agency terms Riyadh, Aldaleel Travel conditions"
-        path="/terms-and-conditions"
-      />
 
       <section className="relative overflow-hidden bg-[#071522] px-5 pb-16 pt-32 text-white md:pb-20 md:pt-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(39,169,79,0.24),transparent_28%),linear-gradient(180deg,#071522_0%,#08233a_100%)]" />

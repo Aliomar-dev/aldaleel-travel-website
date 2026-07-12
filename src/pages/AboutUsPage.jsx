@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 import {
   FaPlane,
   FaBullseye,
@@ -168,6 +170,9 @@ const SectionBadge = ({ children, icon: Icon = FaCheckCircle, dark = false }) =>
 };
 
 const AboutUsPage = () => {
+
+   <PageSeo page="about" />
+   
   const [signatureText, setSignatureText] = useState("");
   const [signatureDone, setSignatureDone] = useState(false);
   const signatureName = "Zulfiqar Ali";
@@ -208,13 +213,7 @@ const AboutUsPage = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
-      <SEO
-        title="About Aldaleel Travel & Tourism | Travel Agency in Riyadh"
-        description="Learn about Aldaleel Travel & Tourism, a reliable travel agency in Riyadh, Saudi Arabia helping customers with flights, visa guidance, hotels, Smart Umrah, transport and customized tour packages."
-        keywords="about Aldaleel Travel, Aldaleel Travel Riyadh, travel agency in Riyadh, Saudi travel company, Aldaleel Travel and Tourism KSA, tour packages Riyadh"
-        path="/about"
-      />
-
+  
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(39,169,79,0.12),transparent_27%),radial-gradient(circle_at_88%_16%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_46%,#ffffff_100%)]" />
 
       <div className="absolute inset-0 opacity-[0.22]">
