@@ -23,8 +23,9 @@ const Navbar = () => {
 
   const isBookingPage = location.pathname === "/booking";
   const isExpertisePage = location.pathname === "/expertise";
-  const isAboutPage = location.pathname === "/about";
-  const isBlogPage = location.pathname === "/blog";
+const isAboutPage =
+  location.pathname === "/about" ||
+  location.pathname === "/company/about-us";  const isBlogPage = location.pathname === "/blog";
   const isTourPackagesPage = location.pathname === "/tour-packages";
 
   const forceSolidNavbar =

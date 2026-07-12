@@ -50,8 +50,76 @@ const CountUp = ({ end, suffix = "" }) => {
   );
 };
 
-const Company = () => {
+
+const TypingCompanyTitle = ({ playKey }) => {
+  const firstPart = "Your trusted travel partner for ";
+  const highlightedPart = "smooth journeys";
+  const fullText = `${firstPart}${highlightedPart}`;
+  const [visibleLength, setVisibleLength] = useState(0);
+
+  useEffect(() => {
+    setVisibleLength(0);
+
+    let index = 0;
+    const typingTimer = window.setInterval(() => {
+      index += 1;
+      setVisibleLength(index);
+
+      if (index >= fullText.length) {
+        window.clearInterval(typingTimer);
+      }
+    }, 42);
+
+    return () => window.clearInterval(typingTimer);
+  }, [playKey, fullText]);
+
+  const visibleFirstPart = firstPart.slice(
+    0,
+    Math.min(visibleLength, firstPart.length)
+  );
+
+  const visibleHighlightedPart =
+    visibleLength > firstPart.length
+      ? highlightedPart.slice(0, visibleLength - firstPart.length)
+      : "";
+
+  return (
+    <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-navy md:text-6xl">
+      <span>{visibleFirstPart}</span>
+
+      <span className="text-green">{visibleHighlightedPart}</span>
+
+      {visibleLength < fullText.length && (
+        <motion.span
+          aria-hidden="true"
+          animate={{ opacity: [1, 0.2, 1] }}
+          transition={{
+            duration: 0.8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.08em] rounded-full bg-green"
+        />
+      )}
+    </h2>
+  );
+};
+
+const About = () => {
+  const sectionRef = useRef(null);
+  const sectionInView = useInView(sectionRef, {
+    once: false,
+    amount: 0.32,
+  });
+
+  const [titlePlayKey, setTitlePlayKey] = useState(0);
   const [learnMoreFly, setLearnMoreFly] = useState(false);
+
+  useEffect(() => {
+    if (sectionInView) {
+      setTitlePlayKey((previous) => previous + 1);
+    }
+  }, [sectionInView]);
 
   const handleLearnMoreClick = () => {
     if (learnMoreFly) return;
@@ -65,9 +133,20 @@ const Company = () => {
   };
 
   return (
-    <section
+    <motion.section
+      ref={sectionRef}
       id="company"
-      className="relative overflow-hidden bg-white py-16 text-navy md:py-20"
+      initial={{ opacity: 0, y: 70, scale: 0.985 }}
+      animate={
+        sectionInView
+          ? { opacity: 1, y: 0, scale: 1 }
+          : { opacity: 0.35, y: 42, scale: 0.99 }
+      }
+      transition={{
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="relative overflow-hidden bg-white py-16 text-navy will-change-transform md:py-20"
     >
       {/* Soft premium background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_18%,rgba(39,169,79,0.09),transparent_24%),radial-gradient(circle_at_90%_12%,rgba(8,35,58,0.06),transparent_20%),linear-gradient(180deg,#ffffff_0%,#f7fafc_100%)]" />
@@ -121,19 +200,24 @@ const Company = () => {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-45" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green shadow-[0_0_14px_rgba(39,169,79,0.85)]" />
               </span>
-              About Aldaleel
+              About Aldaleel Travel
             </motion.div>
 
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: 0.06 }}
-              className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-navy md:text-6xl"
+              animate={
+                sectionInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 20 }
+              }
+              transition={{
+                duration: 0.55,
+                delay: 0.08,
+                ease: "easeOut",
+              }}
             >
-              Your trusted travel partner for{" "}
-              <span className="text-green">smooth journeys</span>
-            </motion.h2>
+              <TypingCompanyTitle playKey={titlePlayKey} />
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 24 }}
@@ -185,7 +269,7 @@ const Company = () => {
               className="mt-7"
             >
               <MotionLink
-                to="/about?back=company"
+  to="/company/about-us?back=about"
                 onClick={handleLearnMoreClick}
                 whileHover="hover"
                 whileTap="tap"
@@ -249,19 +333,19 @@ const Company = () => {
                   <FaPlane />
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.4 }}
-                  transition={{ duration: 0.55, delay: 0.18 }}
-                  className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-6 md:right-6"
-                >
-                  <div className="rounded-[1.4rem] border border-white/15 bg-white/12 p-4 text-white backdrop-blur-2xl md:p-5">
-                    <p className="text-[11px] font-black uppercase tracking-[0.22em] text-green">
-                      Aldaleel Travel & Tourism
-                    </p>
-                  </div>
-                </motion.div>
+              <motion.div
+  initial={{ opacity: 0, y: 18 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: false, amount: 0.4 }}
+  transition={{ duration: 0.5, delay: 0.18 }}
+  className="absolute bottom-4 left-1/2 -translate-x-1/2"
+>
+  <div className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-center backdrop-blur-xl">
+    <p className="whitespace-nowrap text-[9px] font-black uppercase tracking-[0.16em] text-green sm:text-[10px]">
+      Aldaleel Travel &amp; Tourism
+    </p>
+  </div>
+</motion.div>
               </div>
             </div>
 
@@ -293,8 +377,8 @@ const Company = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
-export default Company;
+export default About;

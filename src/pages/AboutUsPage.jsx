@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
-import SEO from "../components/SEO";
 import PageSeo from "../components/PageSeo";
 
 import {
@@ -25,6 +24,7 @@ import {
   FaQuoteLeft,
   FaSignature,
   FaCheckCircle,
+  FaImages,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -130,6 +130,34 @@ const processSteps = [
   },
 ];
 
+
+const agencyImages = [
+  {
+    src: "/agency/office-main.jpg",
+    alt: "Aldaleel Travel & Tourism office in Riyadh",
+    label: "Our Office",
+    className: "sm:col-span-2 sm:row-span-2",
+  },
+  {
+    src: "/agency/team-support.jpg",
+    alt: "Aldaleel Travel customer support team",
+    label: "Travel Support",
+    className: "",
+  },
+  {
+    src: "/agency/consultation.jpg",
+    alt: "Travel consultation at Aldaleel Travel & Tourism",
+    label: "Client Consultation",
+    className: "",
+  },
+  {
+    src: "/agency/workspace.jpg",
+    alt: "Aldaleel Travel professional workspace",
+    label: "Professional Workspace",
+    className: "sm:col-span-2",
+  },
+];
+
 const SectionBadge = ({ children, icon: Icon = FaCheckCircle, dark = false }) => {
   return (
     <div
@@ -170,9 +198,6 @@ const SectionBadge = ({ children, icon: Icon = FaCheckCircle, dark = false }) =>
 };
 
 const AboutUsPage = () => {
-
-   <PageSeo page="about" />
-   
   const [signatureText, setSignatureText] = useState("");
   const [signatureDone, setSignatureDone] = useState(false);
   const signatureName = "Zulfiqar Ali";
@@ -212,7 +237,10 @@ const AboutUsPage = () => {
   }, [isSignatureInView, signatureDone]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
+    <>
+      <PageSeo page="about" />
+
+      <section className="relative min-h-screen overflow-hidden bg-[#f7fafc] pt-[106px] text-navy md:pt-[118px]">
   
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_14%,rgba(39,169,79,0.12),transparent_27%),radial-gradient(circle_at_88%_16%,rgba(8,35,58,0.09),transparent_25%),linear-gradient(180deg,#ffffff_0%,#f7fafc_46%,#ffffff_100%)]" />
 
@@ -522,49 +550,45 @@ const AboutUsPage = () => {
           </div>
         </motion.div>
 
-        {/* Vision Mission */}
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-            className="rounded-[2rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(39,169,79,0.08)_100%)] p-6 shadow-[0_22px_70px_rgba(16,32,51,0.075)] md:p-8"
-          >
-            <SectionBadge icon={FaEye}>Our Vision</SectionBadge>
+       {/* Vision Mission */}
+<div className="mt-5 grid gap-5 md:grid-cols-2">
+  <motion.div
+    initial={{ opacity: 0, y: 26 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.25 }}
+    transition={{ duration: 0.55 }}
+    className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,#071522_0%,#08233A_58%,#0f3b35_100%)] p-6 text-white shadow-[0_22px_70px_rgba(8,35,58,0.22)] md:p-8"
+  >
+    <SectionBadge icon={FaEye} dark>
+      Our Vision
+    </SectionBadge>
 
-            <h3 className="mt-3 text-2xl font-black tracking-tight">
-              Our Vision
-            </h3>
+    <p className="mt-3 text-sm font-semibold leading-7 text-white/72 sm:text-base sm:leading-8">
+      To become a trusted and recognized travel agency in Riyadh and across
+      Saudi Arabia, known for clear guidance, dependable support, smooth
+      journeys and well-planned travel packages.
+    </p>
+  </motion.div>
 
-            <p className="mt-3 text-sm font-semibold leading-7 text-slate-600 sm:text-base sm:leading-8">
-              To become a trusted and recognized travel agency in Riyadh and
-              across Saudi Arabia, known for clear guidance, dependable support,
-              smooth journeys and well-planned travel packages.
-            </p>
-          </motion.div>
+  <motion.div
+    initial={{ opacity: 0, y: 26 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.25 }}
+    transition={{ duration: 0.55, delay: 0.08 }}
+    className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,#071522_0%,#08233A_58%,#0f3b35_100%)] p-6 text-white shadow-[0_22px_70px_rgba(8,35,58,0.22)] md:p-8"
+  >
+    <SectionBadge icon={FaBullseye} dark>
+      Our Mission
+    </SectionBadge>
 
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-            className="rounded-[2rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(8,35,58,0.045)_45%,rgba(39,169,79,0.075)_100%)] p-6 shadow-[0_22px_70px_rgba(16,32,51,0.075)] md:p-8"
-          >
-            <SectionBadge icon={FaBullseye}>Our Mission</SectionBadge>
-
-            <h3 className="mt-3 text-2xl font-black tracking-tight">
-              Our Mission
-            </h3>
-
-            <p className="mt-3 text-sm font-semibold leading-7 text-slate-600 sm:text-base sm:leading-8">
-              To simplify travel planning by providing organized assistance,
-              honest guidance, suitable travel options and professional support
-              for flights, visas, hotels, Smart Umrah, transport services and
-              customized tour packages.
-            </p>
-          </motion.div>
-        </div>
+    <p className="mt-3 text-sm font-semibold leading-7 text-white/72 sm:text-base sm:leading-8">
+      To simplify travel planning by providing organized assistance, honest
+      guidance, suitable travel options and professional support for flights,
+      visas, hotels, Smart Umrah, transport services and customized tour
+      packages.
+    </p>
+  </motion.div>
+</div>
 
         {/* Why Choose Us */}
         <motion.div
@@ -621,113 +645,265 @@ const AboutUsPage = () => {
           </div>
         </motion.div>
 
-        {/* Our Approach */}
+       {/* Our Approach */}
+<motion.div
+  initial={{ opacity: 0, y: 26 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.22 }}
+  transition={{ duration: 0.55 }}
+  className="mt-10 overflow-hidden rounded-[2rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(8,35,58,0.035)_44%,rgba(39,169,79,0.07)_100%)] p-6 shadow-[0_22px_70px_rgba(16,32,51,0.08)] md:p-8"
+>
+  <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+    {/* Left Content */}
+    <div className="self-start">
+      <SectionBadge icon={FaRoute}>Our Approach</SectionBadge>
+
+      <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
+        How we help our customers
+      </h2>
+
+      <p className="mt-3 max-w-md text-sm font-semibold leading-7 text-slate-600">
+        Our process is simple, practical and customer-focused.
+      </p>
+    </div>
+
+    {/* Right Steps - 2 Columns / 2 Rows */}
+    <div className="grid gap-3 sm:grid-cols-2">
+      {processSteps.map((item, index) => (
         <motion.div
-          initial={{ opacity: 0, y: 26 }}
+          key={item.step}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.55 }}
-          className="mt-10 overflow-hidden rounded-[2rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(8,35,58,0.035)_44%,rgba(39,169,79,0.07)_100%)] p-6 shadow-[0_22px_70px_rgba(16,32,51,0.08)] md:p-8"
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{
+            duration: 0.4,
+            delay: index * 0.06,
+            ease: "easeOut",
+          }}
+          className="group rounded-[1.35rem] border border-green/10 bg-white/80 p-4 shadow-[0_12px_34px_rgba(16,32,51,0.05)] transition hover:-translate-y-0.5 hover:border-green/20 hover:shadow-[0_18px_45px_rgba(16,32,51,0.09)]"
         >
-          <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="flex items-start gap-3">
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green/10 text-[11px] font-black text-green transition group-hover:bg-green group-hover:text-white">
+              {item.step}
+            </span>
+
             <div>
-              <SectionBadge icon={FaRoute}>Our Approach</SectionBadge>
+              <h3 className="text-base font-black text-navy">
+                {item.title}
+              </h3>
 
-              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
-                How we help our customers
-              </h2>
-            </div>
-
-            <p className="max-w-md text-sm font-semibold leading-7 text-slate-600">
-              Our process is simple, practical and customer-focused.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((item) => (
-              <div
-                key={item.step}
-                className="rounded-[1.5rem] border border-green/10 bg-white/78 p-5"
-              >
-                <span className="inline-flex rounded-full bg-green/10 px-3 py-1 text-xs font-black text-green">
-                  {item.step}
-                </span>
-
-                <h3 className="mt-4 text-lg font-black">{item.title}</h3>
-
-                <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Services Snapshot */}
-        <motion.div
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.55 }}
-          className="mt-10"
-        >
-          <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <SectionBadge icon={FaPlane}>What We Do</SectionBadge>
-
-              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
-                Travel services we provide
-              </h2>
-
-              <p className="mt-3 max-w-xl text-sm font-semibold leading-7 text-slate-600">
-                From single bookings to complete tour packages, Aldaleel helps
-                customers plan every important part of their journey with
-                clarity and comfort.
+              <p className="mt-1 text-xs font-semibold leading-5 text-slate-600">
+                {item.desc}
               </p>
             </div>
-
-            <Link
-              to="/expertise?back=services"
-              replace
-              className="inline-flex items-center gap-2 text-sm font-black text-green transition hover:gap-3"
-            >
-              View Expertise
-              <FaPlane className="rotate-360 text-xs" />
-            </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-
-              return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
-                  className="group rounded-[1.6rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(39,169,79,0.065)_100%)] p-5 shadow-[0_18px_55px_rgba(16,32,51,0.06)] transition hover:-translate-y-1 hover:shadow-[0_26px_75px_rgba(16,32,51,0.11)]"
-                >
-                  <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-green/10 text-xl text-green transition group-hover:bg-green group-hover:text-white">
-                    <span className="absolute inset-0 rounded-2xl bg-green/25 opacity-45 blur-xl transition group-hover:opacity-70" />
-                    <Icon className="relative z-10" />
-                  </div>
-
-                  <h3 className="mt-4 text-base font-black text-navy">
-                    {service.title}
-                  </h3>
-
-                  <p className="mt-2 text-xs font-semibold leading-5 text-slate-500">
-                    {service.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
           </div>
         </motion.div>
+      ))}
+    </div>
+  </div>
+</motion.div>
 
-        {/* Closing Statement */}
+       {/* Services Snapshot */}
+<motion.div
+  initial={{ opacity: 0, y: 26 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.22 }}
+  transition={{ duration: 0.55 }}
+  className="mt-10 rounded-[2rem] bg-[#08233A] p-6 shadow-[0_24px_75px_rgba(8,35,58,0.22)] md:p-8"
+>
+  <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div>
+      <SectionBadge icon={FaPlane} dark>
+        What We Do
+      </SectionBadge>
+
+      <h2 className="mt-2 text-3xl font-black tracking-tight text-white md:text-4xl">
+        Travel services we provide
+      </h2>
+
+      <p className="mt-3 max-w-xl text-sm font-semibold leading-7 text-white/70">
+        From single bookings to complete tour packages, Aldaleel helps
+        customers plan every important part of their journey with clarity and
+        comfort.
+      </p>
+    </div>
+
+    <Link
+      to="/expertise?back=services"
+      replace
+      className="inline-flex items-center gap-2 text-sm font-black text-green transition hover:gap-3"
+    >
+      View Expertise
+      <FaPlane className="rotate-360 text-xs" />
+    </Link>
+  </div>
+
+<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+  {services.map((service, index) => {
+    const Icon = service.icon;
+
+    return (
+      <motion.div
+        key={service.title}
+        initial={{ opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.45, delay: index * 0.05 }}
+        className="group rounded-[1.6rem] border border-white/15 bg-white p-5 shadow-[0_18px_55px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:border-green/25 hover:shadow-[0_26px_75px_rgba(0,0,0,0.28)]"
+      >
+        <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-green/10 text-xl text-green transition group-hover:bg-green group-hover:text-white">
+          <span className="absolute inset-0 rounded-2xl bg-green/25 opacity-45 blur-xl transition group-hover:opacity-70" />
+          <Icon className="relative z-10" />
+        </div>
+
+        <h3 className="mt-4 text-base font-black text-navy">
+          {service.title}
+        </h3>
+
+        <p className="mt-2 text-xs font-semibold leading-5 text-slate-600">
+          {service.desc}
+        </p>
+      </motion.div>
+    );
+  })}
+</div>
+</motion.div>
+
+    {/* Agency Gallery + Contact */}
+<motion.div
+  initial={{ opacity: 0, y: 28 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.18 }}
+  transition={{ duration: 0.65, ease: "easeOut" }}
+  className="mt-10 overflow-hidden rounded-[2rem] border border-green/10 bg-[linear-gradient(135deg,#ffffff_0%,rgba(39,169,79,0.055)_48%,rgba(8,35,58,0.04)_100%)] p-4 shadow-[0_26px_85px_rgba(16,32,51,0.09)] sm:p-5 md:p-6"
+>
+  {/* Agency Gallery Header */}
+  <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div>
+      <SectionBadge icon={FaImages}>Inside Our Agency</SectionBadge>
+
+      <h2 className="mt-1 text-2xl font-black tracking-tight text-navy sm:text-3xl md:text-4xl">
+        Meet the space behind every journey
+      </h2>
+
+      <p className="mt-2 max-w-2xl text-sm font-semibold leading-7 text-slate-600 sm:text-base">
+        A closer look at the team, workspace and professional environment behind
+        Aldaleel Travel &amp; Tourism in Riyadh.
+      </p>
+    </div>
+
+    <span className="inline-flex w-fit items-center gap-2 rounded-full border border-green/15 bg-green/10 px-3.5 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-green">
+      <FaMapMarkerAlt className="text-[10px]" />
+      Riyadh, Saudi Arabia
+    </span>
+  </div>
+
+  {/* Agency Images */}
+  <div className="grid auto-rows-[150px] gap-3 sm:grid-cols-2 sm:auto-rows-[175px] lg:grid-cols-4">
+    {agencyImages.map((image, index) => (
+      <motion.figure
+        key={image.src}
+        initial={{ opacity: 0, y: 18, scale: 0.98 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{
+          duration: 0.45,
+          delay: index * 0.06,
+          ease: "easeOut",
+        }}
+        className={`group relative overflow-hidden rounded-[1.3rem] border border-white bg-[#071522] shadow-[0_14px_45px_rgba(8,35,58,0.12)] ${
+          image.className
+        }`}
+      >
+        <motion.img
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+          whileHover={{ scale: 1.06 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="h-full w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_32%,rgba(7,21,34,0.9)_100%)]" />
+
+        <figcaption className="absolute bottom-0 left-0 right-0 flex items-center justify-between gap-3 p-3.5">
+          <span className="text-xs font-black text-white sm:text-sm">
+            {image.label}
+          </span>
+
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-green backdrop-blur-xl transition group-hover:bg-green group-hover:text-white">
+            <FaPlane className="rotate-360 text-[9px]" />
+          </span>
+        </figcaption>
+      </motion.figure>
+    ))}
+  </div>
+
+  {/* Contact Strip */}
+  <div className="mt-5 overflow-hidden rounded-[1.6rem] bg-[linear-gradient(135deg,#071522_0%,#08233a_58%,#0f3b35_100%)] p-4 text-white shadow-[0_22px_65px_rgba(7,21,34,0.18)] sm:p-5">
+    <div className="grid gap-5 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+      {/* Contact Intro */}
+      <div>
+        <SectionBadge icon={FaEnvelope} dark>
+          Contact Aldaleel
+        </SectionBadge>
+
+        <h3 className="mt-1 text-2xl font-black tracking-tight sm:text-3xl">
+          Plan your next journey with us
+        </h3>
+
+        <p className="mt-2 max-w-xl text-sm font-semibold leading-6 text-white/65">
+          Reach out for flights, visas, Smart Umrah, Hajj, hotels, transport or
+          customized tour packages.
+        </p>
+      </div>
+
+      {/* Compact Contact Cards */}
+      <div className="grid gap-2.5 sm:grid-cols-2">
+        <a
+          href="mailto:info@aldaleeltravel.com"
+          className="group flex items-center gap-3 rounded-[1.1rem] border border-white/10 bg-white/8 p-3.5 text-sm font-bold text-white/78 transition hover:border-green/35 hover:bg-white/12 hover:text-green"
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-green/12 text-green transition group-hover:bg-green group-hover:text-white">
+            <FaEnvelope className="text-sm" />
+          </span>
+
+          <span className="min-w-0 truncate">
+            info@aldaleeltravel.com
+          </span>
+        </a>
+
+        <a
+          href="tel:+966531314557"
+          className="group flex items-center gap-3 rounded-[1.1rem] border border-white/10 bg-white/8 p-3.5 text-sm font-bold text-white/78 transition hover:border-green/35 hover:bg-white/12 hover:text-green"
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-green/12 text-green transition group-hover:bg-green group-hover:text-white">
+            <FaPhoneAlt className="text-sm" />
+          </span>
+
+          <span>+966-53 1314557</span>
+        </a>
+
+        <a
+          href={mapLink}
+          target="_blank"
+          rel="noreferrer"
+          className="group flex items-start gap-3 rounded-[1.1rem] border border-white/10 bg-white/8 p-3.5 text-sm font-bold leading-6 text-white/78 transition hover:border-green/35 hover:bg-white/12 hover:text-green sm:col-span-2"
+        >
+          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-green/12 text-green transition group-hover:bg-green group-hover:text-white">
+            <FaMapMarkerAlt className="text-sm" />
+          </span>
+
+          <span>{address}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</motion.div>
+
+
+            {/* Closing Statement */}
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -754,64 +930,10 @@ const AboutUsPage = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* Contact */}
-        <motion.div
-          initial={{ opacity: 0, y: 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.55 }}
-          className="mt-10 overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#071522_0%,#08233a_58%,#0f3b35_100%)] p-6 text-white shadow-[0_28px_85px_rgba(7,21,34,0.18)] md:p-8"
-        >
-          <div className="grid gap-7 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-            <div>
-              <SectionBadge icon={FaEnvelope} dark>
-                Contact
-              </SectionBadge>
-
-              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
-                Get in touch with Aldaleel
-              </h2>
-
-              <p className="mt-3 max-w-2xl text-sm font-semibold leading-7 text-white/62 sm:text-base">
-                Reach out for booking support, visa guidance, hotel
-                reservations, Smart Umrah planning, transport services or
-                customized tour package arrangements.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <a
-                href="mailto:info@aldaleeltravel.com"
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/8 p-4 text-sm font-bold text-white/78 transition hover:border-green/35 hover:text-green"
-              >
-                <FaEnvelope className="text-green" />
-                info@aldaleeltravel.com
-              </a>
-
-              <a
-                href="tel:+966531314557"
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/8 p-4 text-sm font-bold text-white/78 transition hover:border-green/35 hover:text-green"
-              >
-                <FaPhoneAlt className="text-green" />
-                +966-53 1314557
-              </a>
-
-              <a
-                href={mapLink}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/8 p-4 text-sm font-bold leading-6 text-white/78 transition hover:border-green/35 hover:text-green"
-              >
-                <FaMapMarkerAlt className="mt-1 shrink-0 text-green" />
-                {address}
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 
-export default AboutUsPage;
+export default AboutUsPage;   

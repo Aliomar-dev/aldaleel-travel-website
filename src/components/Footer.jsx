@@ -20,7 +20,7 @@ const address =
 const mapLink = "https://maps.app.goo.gl/L7VnDLCA3RifcYsa8";
 const reviewLink = "https://g.page/r/CUqiIlQhhGsrEAE/review";
 
-const developerName = "{HD} Code Lab";
+const developerName = "</HD> Code Lab";
 const developerEmail = "omar786.official@gmail.com";
 
 const quickLinks = [

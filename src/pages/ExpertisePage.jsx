@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import SEO from "../components/SEO";
+import PageSeo from "../components/PageSeo";
+
 import {
   FaPlane,
   FaPlaneDeparture,

@@ -91,7 +91,7 @@ function App() {
     <Route path="/booking" element={<BookingPage />} />
     <Route path="/thank-you" element={<ThankYou />} />
     <Route path="/expertise" element={<ExpertisePage />} />
-    <Route path="/about" element={<AboutUsPage />} />
+<Route path="/company/about-us" element={<AboutUsPage />} />
     <Route path="/tour-packages" element={<TourPackagesPage />} />
     <Route path="/blog" element={<BlogPage />} />
     <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
