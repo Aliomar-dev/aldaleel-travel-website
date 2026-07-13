@@ -97,14 +97,7 @@ const SectionBadge = ({ children }) => {
   );
 };
 
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const backSection = params.get("back");
 
-  if (backSection) {
-    sessionStorage.setItem("scrollToSection", backSection);
-  }
-}, []);
 
 const ExpertisePage = () => {
 
@@ -130,6 +123,15 @@ const ExpertisePage = () => {
       });
     }, 80);
   };
+
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
+}, []);
 
 
   return (
