@@ -21,9 +21,20 @@ const TourPackagesPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
+  useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
+}, []);
   
 
   return (
+
+    
     <main className="min-h-screen overflow-hidden bg-[#f7fafc] pt-[92px] text-navy md:pt-[104px]">
     
       <section className="relative flex min-h-[calc(100vh-92px)] items-center px-5 py-16 md:min-h-[calc(100vh-104px)] md:py-20">

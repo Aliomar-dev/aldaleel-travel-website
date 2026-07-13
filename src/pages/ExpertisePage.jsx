@@ -97,6 +97,15 @@ const SectionBadge = ({ children }) => {
   );
 };
 
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
+}, []);
+
 const ExpertisePage = () => {
 
       <PageSeo page="expertise" />

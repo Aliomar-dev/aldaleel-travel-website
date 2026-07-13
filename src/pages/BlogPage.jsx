@@ -467,6 +467,14 @@ const BlogPage = () => {
   };
 
   useEffect(() => {
+
+const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
+
     fetchLatestUpdates();
   }, [apiUrl]);
 

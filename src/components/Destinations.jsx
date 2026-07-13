@@ -284,7 +284,7 @@ const Destinations = () => {
 
     /* Mobile */
     right-3
-    top-[67%]
+    top-[70%]
     -translate-y-1/2
     px-2 py-3
 

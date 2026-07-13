@@ -58,6 +58,15 @@ const TermsAndConditions = () => {
 
         <PageSeo page="thankYou" />
 
+        useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
+}, []);
+
   return (
     <main className="min-h-screen bg-[#f7fafc] text-navy">
 

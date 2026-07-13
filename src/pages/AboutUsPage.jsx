@@ -253,6 +253,13 @@ const AboutUsPage = () => {
   const mapLink = "https://maps.app.goo.gl/L7VnDLCA3RifcYsa8";
 
   useEffect(() => {
+
+    const params = new URLSearchParams(window.location.search);
+  const backSection = params.get("back");
+
+  if (backSection) {
+    sessionStorage.setItem("scrollToSection", backSection);
+  }
     if (!isSignatureInView || signatureDone) return;
 
     let index = 0;
@@ -474,7 +481,7 @@ const AboutUsPage = () => {
                 </h2>
 
                 <div className="mt-6 rounded-[1.35rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.10),rgba(39,169,79,0.08))] p-4">
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2 sm:gap-3">
                     <FaQuoteLeft className="mt-1 shrink-0 text-green" />
 
                     <p className="text-sm font-semibold leading-7 text-white/72">
@@ -686,7 +693,7 @@ const AboutUsPage = () => {
     </div>
 
     {/* Right Steps - 2 Columns / 2 Rows */}
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
       {processSteps.map((item, index) => (
         <motion.div
           key={item.step}
@@ -698,19 +705,19 @@ const AboutUsPage = () => {
             delay: index * 0.06,
             ease: "easeOut",
           }}
-          className="group rounded-[1.35rem] border border-green/10 bg-white/80 p-4 shadow-[0_12px_34px_rgba(16,32,51,0.05)] transition hover:-translate-y-0.5 hover:border-green/20 hover:shadow-[0_18px_45px_rgba(16,32,51,0.09)]"
+          className="group rounded-[1.15rem] border border-green/10 bg-white/80 p-3 shadow-[0_12px_34px_rgba(16,32,51,0.05)] transition hover:-translate-y-0.5 hover:border-green/20 hover:shadow-[0_18px_45px_rgba(16,32,51,0.09)] sm:rounded-[1.35rem] sm:p-4"
         >
           <div className="flex items-start gap-3">
-            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green/10 text-[11px] font-black text-green transition group-hover:bg-green group-hover:text-white">
+            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green/10 text-[10px] font-black text-green transition group-hover:bg-green group-hover:text-white sm:h-9 sm:w-9 sm:text-[11px]">
               {item.step}
             </span>
 
             <div>
-              <h3 className="text-base font-black text-navy">
+              <h3 className="text-[13px] font-black leading-5 text-navy sm:text-base">
                 {item.title}
               </h3>
 
-              <p className="mt-1 text-xs font-semibold leading-5 text-slate-600">
+              <p className="mt-1 text-[10px] font-semibold leading-4 text-slate-600 sm:text-xs sm:leading-5">
                 {item.desc}
               </p>
             </div>
@@ -842,14 +849,18 @@ const AboutUsPage = () => {
         <motion.img
           src={image.src}
           alt={image.alt}
-          loading="lazy"
+          loading="eager"
           decoding="async"
+          fetchPriority={index === 0 ? "high" : "auto"}
+          onError={(event) => {
+            event.currentTarget.src = "/agency/office-main.png";
+          }}
           whileHover={{ scale: 1.055 }}
           transition={{
             duration: 0.65,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className={`absolute inset-0 h-full w-full object-cover ${
+          className={`absolute inset-0 block h-full w-full object-cover ${
             isOffice
               ? "object-center"
               : isTravelSupport
